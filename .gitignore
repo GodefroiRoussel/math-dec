@@ -1,0 +1,5 @@
+# .git directory
+.git
+
+# les fichiers interprétés
+*.pyc
