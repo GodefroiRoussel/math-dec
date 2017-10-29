@@ -10,16 +10,20 @@ from Groupe import *
 
 #print("Veuillez entrer le nombre d'étudiants :")
 #n = int(input())
-n = 10
+n = 37
 
-#nbTrinome = n % 3
-nbTrinome = 0
-#nbBinome = (n - nbTrinome * 2) // 2 
-nbBinome = 5
+nbTrinome = n // 3
+#s'il nous reste une personne orphelin on enlève un trinome pour former des binomes à la place
+if(n-nbTrinome*3 == 1):
+        nbTrinome-=1
 
-print(n)
-print(nbTrinome)
-print(nbBinome)
+#nbTrinome = 0
+nbBinome = (n - nbTrinome*3) // 2 
+#nbBinome = 5
+
+print("Nombre d'élève :" , n)
+print("Trinomes: " , nbTrinome)
+print("Binomes: " , nbBinome)
 
 #TODO: Un système pour rentrer manuellement les données et non pas dans le code
 
@@ -76,6 +80,17 @@ for i in range(0,5):
         del eleves[0]
         del eleves[0]
 
+#for i in range(0,nbTrinome):
+        #g = Groupe([eleves[0],eleves[1],eleves[2]])
+        #groupes.append(g)
+        #del eleves[0]
+        #del eleves[0]
+        #del eleves[0]
+#for i in range(0,nbBinome):
+        #g = Groupe([eleves[0],eleves[1]])
+        #groupes.append(g)
+        #del eleves[0]
+        #del eleves[0]
 
 
 def permutation(e1, e2):
