@@ -18,7 +18,7 @@ if(n-nbTrinome*3 == 1):
         nbTrinome-=1
 
 #nbTrinome = 0
-nbBinome = (n - nbTrinome*3) // 2 
+nbBinome = (n - nbTrinome*3) // 2
 #nbBinome = 5
 
 print("Nombre d'élève :" , n)
@@ -54,14 +54,14 @@ groupes = []
 #eleves = []
 #for i in range(0, n):
         #print("Entrer le nom :" )
-        #nom = input()        
+        #nom = input()
         #print("Entrer le prénom :")
         #prenom = input()
         #e = Eleve(prenom,nom)
         #try:
                 #print("Entrer les mentions sur les autres éléves séparées par des virgules [TB,B,AB,P,I,AR] :")
                 #mentions = input().upper().split(',')
-                #mentions = mentions[:i]+["X"]+mentions[i:] #ajouter une note pour soi même 
+                #mentions = mentions[:i]+["X"]+mentions[i:] #ajouter une note pour soi même
                 #if(len(mentions)!=n):
                         #raise Exception("Il manque des mentions")
                 #e.setSatisfaction(mentions)
@@ -70,10 +70,11 @@ groupes = []
         #except Exception as e : #vérifier que la taille est de n
                 #print("Erreur :", e)
                 #exit()
-        
+
 
 #TODO: Faire pour tous les binomes et trinomes possibles
 #Ici cela ne concerne que cet exemple précis
+print("Avant permutation")
 for i in range(0,5):
         g = Groupe()
         eleves[0].setGroupe(g)
@@ -97,10 +98,32 @@ for i in range(0,5):
         #del eleves[0]
         #del eleves[0]
 
-
 def permutation(e1, e2):
         """ Fonction échangeant 2 élèves.
         @In :   e1 = Eleve
                 e2 = Eleve
         @Out :
         """
+        # On enlève e1 de son groupe
+        e1.getGroupe().removeEleve(e1)
+        # On sauvegarde le groupe de e1
+        tampon = e1.getGroupe()
+        # On lui attribue le groupe g2, on l'ajoute dans g2
+        e1.setGroupe(e2.getGroupe())
+        e1.getGroupe().setEleve(e1)
+
+        # On enlève e2 de son groupe, on lui attribue le groupe g1, on l'ajoute dans g1
+        e2.getGroupe().removeEleve(e2)
+        e2.setGroupe(tampon)
+        e2.getGroupe().setEleve(e2)
+
+
+print("Après permutation")
+permutation(e1,e3)
+for i in range(0,5):
+        groupes[i].calculSatisfaction()
+
+print("Après 2eme permutation")
+permutation(e1,e3)
+for i in range(0,5):
+        groupes[i].calculSatisfaction()

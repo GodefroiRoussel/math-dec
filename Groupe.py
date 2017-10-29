@@ -8,9 +8,15 @@ class Groupe:
 
     def getNote(self):
         return self.note
-    
+
+    def getEleves(self):
+        return self.eleves
+
     def setEleve(self,eleve):
         self.eleves.append(eleve)
+
+    def removeEleve(self,eleve):
+        self.eleves.remove(eleve)
 
     # Correspond à setNote
     def calculSatisfaction(self):
@@ -30,11 +36,11 @@ class Groupe:
             B+ = 9      TB + B
             TB = 10     TB + TB
         """
-        self.notes = []#liste des satisfactions de chaque éleves groupe
+        self.note = 0
         for eleve in self.eleves:
             eleve.calculNote()
-            self.notes.append(eleve.getNote())
-        print(self.notes)
+            self.note = self.note + eleve.getNote()
+        print(self.note)
 
         #e1 = eleves[0]
         #e2 = eleves[1]
@@ -50,7 +56,3 @@ class Groupe:
         # Do yet another thing
         #else:
         # Do the default
-
-
-    def getEleves(self):
-        return self.eleves
