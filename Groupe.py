@@ -28,7 +28,20 @@ class Groupe:
             B+ = 9      TB + B
             TB = 10     TB + TB
         """
-        
+        #e1 = eleves[0]
+        #e2 = eleves[1]
+        #if len(self)==3:
+            #if eleves[2]
+        #if e1 == "TB"  :
+        # Do the thing
+        #elif x == 'b':
+        # Do the other thing
+        #if x in 'bc':
+        # Fall-through by not using elif, but now the default case includes case 'a'!
+        #elif x in 'xyz':
+        # Do yet another thing
+        #else:
+        # Do the default
 
 
     def getEleves(self):
