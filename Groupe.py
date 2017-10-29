@@ -44,13 +44,13 @@ class Groupe:
 
         #Si le groupe est un trinôme alors on ne fait le calcul qu'avec les 2 élèves ayant la plus petite mention.
         if len(self.getEleves()) == 3:
-            if self.getEleves()[0].getNote() > self.getEleves()[1].getNote() and self.getEleves()[0].getNote() > self.getEleves()[2].getNote():
+            if self.getEleves()[0].getNote() >= self.getEleves()[1].getNote() and self.getEleves()[0].getNote() >= self.getEleves()[2].getNote():
                 e = self.getEleves()[0]
-            elif self.getEleves()[1].getNote() > self.getEleves()[0].getNote() and self.getEleves()[1].getNote() > self.getEleves()[2].getNote():
+            elif self.getEleves()[1].getNote() >= self.getEleves()[0].getNote() and self.getEleves()[1].getNote() >= self.getEleves()[2].getNote():
                 e = self.getEleves()[1]
             else:
                 e = self.getEleves()[2]
 
             self.note = self.note - e.getNote()
 
-        print(self.note)
+        print(self.note/2)
