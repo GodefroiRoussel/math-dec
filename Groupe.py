@@ -3,15 +3,14 @@
 
 class Groupe:
 
-    def __init__(self, eleves):
-        self.eleves = eleves
-        self.notes = []#liste des satisfactions de chaque éleves groupe
-        for eleve in self.eleves:
-            eleve.calculNote()
-            self.notes.append(eleve.note())
+    def __init__(self):
+        self.eleves = []
 
     def getNote(self):
         return self.note
+    
+    def setEleve(self,eleve):
+        self.eleves.append(eleve)
 
     # Correspond à setNote
     def calculSatisfaction(self):
@@ -31,7 +30,12 @@ class Groupe:
             B+ = 9      TB + B
             TB = 10     TB + TB
         """
-        
+        self.notes = []#liste des satisfactions de chaque éleves groupe
+        for eleve in self.eleves:
+            eleve.calculNote()
+            self.notes.append(eleve.getNote())
+        print(self.notes)
+
         #e1 = eleves[0]
         #e2 = eleves[1]
         #if len(self)==3:
