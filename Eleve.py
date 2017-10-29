@@ -1,6 +1,7 @@
 #! /usr/bin/python3.5
 #-*- coding: utf-8 -*-
 
+from mention import mention#dictionnaire des mentions
 
 class Eleve:
 
@@ -14,24 +15,22 @@ class Eleve:
     def getPrenom(self):
         return self.prenom
 
-    def getSatisafactions(self):
+    def getSatisfactions(self):
         return self.mentions
 
     def setSatisfaction(self, liste):
-        self.mentions = liste
-        for mention in self.mentions:
-            mention = self.convertMention(mention)
-
-    def convertMention(self, mention):
-        print("En cours")
-
+        #convertie les satisfactions de l'élève en fonction des valeurs du dictionnaire
+        l = []
+        for i in liste:
+            l.append(mention[i])
+        self.mentions = l
 
     def S(self, ei):
         """ Fonction permettant de retourner la satisfaction de l'élève sur un élève ei
         @In  : ei = indice de l'élève
         @Out : Satisfaction envers cet élève.
         """
-        return self.mentions[i]
+        return self.mentions[ei]
 
     def setGroupe(self, groupe):
         self.g = groupe
@@ -48,7 +47,7 @@ class Eleve:
         @Out :  note de l'élève comprise entre 0 et 10
         """
         eleves = self.getGroupe().getEleves()
-        satisfaction = 10 #Ou TB à définir
+        satisfaction = mention["TB"] 
         for eleve in eleves:
             if (self != eleve and self.S(eleve)<satisfaction):
                 satisfaction = self.S(eleve)
