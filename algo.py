@@ -57,7 +57,7 @@ groupes = []
         #nom = input()
         #print("Entrer le prénom :")
         #prenom = input()
-        #e = Eleve(prenom,nom)
+        #e = Eleve(i+1,prenom,nom)
         #try:
                 #print("Entrer les mentions sur les autres éléves séparées par des virgules [TB,B,AB,P,I,AR] :")
                 #mentions = input().upper().split(',')
@@ -70,7 +70,6 @@ groupes = []
         #except Exception as e : #vérifier que la taille est de n
                 #print("Erreur :", e)
                 #exit()
-
 
 #TODO: Faire pour tous les binomes et trinomes possibles
 #Ici cela ne concerne que cet exemple précis
@@ -87,13 +86,23 @@ for i in range(0,5):
         g.calculSatisfaction()
 
 #for i in range(0,nbTrinome):
-        #g = Groupe([eleves[0],eleves[1],eleves[2]])
+        #g = Groupe()
+        #eleves[0].setGroupe(g)
+        #eleves[1].setGroupe(g)
+        #g.setEleve(eleves[0])
+        #g.setEleve(eleves[1])
         #groupes.append(g)
         #del eleves[0]
         #del eleves[0]
-        #del eleves[0]
+        #g.calculSatisfaction()
 #for i in range(0,nbBinome):
-        #g = Groupe([eleves[0],eleves[1]])
+        #g = Groupe()
+        #eleves[0].setGroupe(g)
+        #eleves[1].setGroupe(g)
+        #eleves[2].setGroupe(g)
+        #g.setEleve(eleves[0])
+        #g.setEleve(eleves[1])
+        #g.setEleve(eleves[2])
         #groupes.append(g)
         #del eleves[0]
         #del eleves[0]
