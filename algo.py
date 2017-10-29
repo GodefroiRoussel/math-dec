@@ -1,16 +1,20 @@
-#! /usr/bin/python3.5
+#! /usr/bin/python
 #-*- coding: utf-8 -*-
 
 import math
 import copy
-from eleve import Eleve
-from groupe import Groupe
+from Eleve import *
+from Groupe import *
 
 # Initialisation des données
+
+#print("Veuillez entrer le nombre d'étudiants :")
+#n = int(input())
 n = 10
+
 #nbTrinome = n % 3
 nbTrinome = 0
-#nbBinome = (n - nbTrinome * 2) // 2 # // correspond à une division entière
+#nbBinome = (n - nbTrinome * 2) // 2 
 nbBinome = 5
 
 print(n)
@@ -18,6 +22,7 @@ print(nbTrinome)
 print(nbBinome)
 
 #TODO: Un système pour rentrer manuellement les données et non pas dans le code
+
 e1 = Eleve("Godefroi","Roussel")
 e1.setSatisfaction(["X","I","B","P","TB","AB","P","P","B","AB"])
 e2 = Eleve("Kévin","Hassan")
@@ -41,6 +46,27 @@ e10.setSatisfaction(["AB","TB","TB","I","TB","P","AB","B","P","X"])
 
 eleves = [e1, e2, e3, e4, e5, e6, e7, e8, e9, e10]
 groupes = []
+
+#eleves = []
+#for i in range(0, n):
+        #print("Entrer le nom :" )
+        #nom = input()        
+        #print("Entrer le prénom :")
+        #prenom = input()
+        #e = Eleve(prenom,nom)
+        #try:
+                #print("Entrer les mentions sur les autres éléves séparées par des virgules [TB,B,AB,P,I,AR] :")
+                #mentions = input().upper().split(',')
+                #mentions = mentions[:i]+["X"]+mentions[i:] #ajouter une note pour soi même 
+                #if(len(mentions)!=n):
+                        #raise Exception("Il manque des mentions")
+                #e.setSatisfaction(mentions)
+                #print(mentions)
+                #eleves.append(e)
+        #except Exception as e : #vérifier que la taille est de n
+                #print("Erreur :", e)
+                #exit()
+        
 
 #TODO: Faire pour tous les binomes et trinomes possibles
 #Ici cela ne concerne que cet exemple précis

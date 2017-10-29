@@ -22,7 +22,7 @@ class Eleve:
 
     def S(self, ei):
         """ Fonction permettant de retourner la satisfaction de l'élève sur un élève ei
-        @In : ei = indice de l'élève
+        @In  : ei = indice de l'élève
         @Out : Satisfaction envers cet élève.
         """
         return self.mentions[i]
