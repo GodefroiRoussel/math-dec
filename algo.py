@@ -126,13 +126,27 @@ def permutation(e1, e2):
         e2.setGroupe(tampon)
         e2.getGroupe().setEleve(e2)
 
+# récupérer le groupe qui à la note la plus petite 
+min_groupe = groupes[0]
+for i in range(1,len(groupes)):
+        if(min_groupe.getNote()>groupes[i].getNote()):
+                min_groupe = groupes[i]
 
-print("Après permutation")
-permutation(e1,e3)
-for i in range(0,5):
-        groupes[i].calculSatisfaction()
+# récupérer l'élève dont la satisfaction est la plus faible
+min_eleve = min_groupe.getEleves()[0]
+for i in range(1,len(min_groupe.getEleves())):
+        if(min_eleve.getNote()>min_groupe.getEleves()[i].getNote()):
+                min_eleve = groupes[i]
 
-print("Après 2eme permutation")
-permutation(e1,e3)
-for i in range(0,5):
-        groupes[i].calculSatisfaction()
+# intervertir l'élève dont la satisfaction est minimale avec un autre élève d'un autre groupe où la satisfaction est >=
+
+
+#print("Après permutation")
+#permutation(e1,e3)
+#for i in range(0,5):
+        #groupes[i].calculSatisfaction()
+
+#print("Après 2eme permutation")
+#permutation(e1,e3)
+#for i in range(0,5):
+        #groupes[i].calculSatisfaction()

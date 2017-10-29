@@ -53,4 +53,4 @@ class Groupe:
 
             self.note = self.note - e.getNote()
 
-        print(self.note/2)
+
