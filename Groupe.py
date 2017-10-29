@@ -24,35 +24,33 @@ class Groupe:
         @In :
         @Out :
         L'ordre sera le suivant :
-            AR = 0      Toutes les combinaisons avec AR
-            I = 1       Toutes les combinaisons avec I
-            P = 2       P + P
-            P+ = 3      AB + P
-            AB- = 4     B + P       ||  TB + P
-            AB = 5      AB + AB
-            AB+ = 6     B + AB
-            B- = 7      TB + AB
-            B = 8       B + B
-            B+ = 9      TB + B
-            TB = 10     TB + TB
+            AR = -130      Toutes les combinaisons avec AR
+            I = -50       Toutes les combinaisons avec I
+            P = -10       P + P
+            P+ = 0        AB + P
+            AB-- = 3       B + P
+            AB- = 5    TB + P
+            AB = 10      AB + AB
+            AB+ = 13     B + AB
+            B- = 15      TB + AB
+            B = 16       B + B
+            B+ = 18      TB + B
+            TB = 20     TB + TB
         """
         self.note = 0
         for eleve in self.eleves:
             eleve.calculNote()
             self.note = self.note + eleve.getNote()
-        print(self.note)
 
-        #e1 = eleves[0]
-        #e2 = eleves[1]
-        #if len(self)==3:
-            #if eleves[2]
-        #if e1 == "TB"  :
-        # Do the thing
-        #elif x == 'b':
-        # Do the other thing
-        #if x in 'bc':
-        # Fall-through by not using elif, but now the default case includes case 'a'!
-        #elif x in 'xyz':
-        # Do yet another thing
-        #else:
-        # Do the default
+        #Si le groupe est un trinôme alors on ne fait le calcul qu'avec les 2 élèves ayant la plus petite mention.
+        if len(self.getEleves()) == 3:
+            if self.getEleves()[0].getNote() > self.getEleves()[1].getNote() and self.getEleves()[0].getNote() > self.getEleves()[2].getNote():
+                e = self.getEleves()[0]
+            elif self.getEleves()[1].getNote() > self.getEleves()[0].getNote() and self.getEleves()[1].getNote() > self.getEleves()[2].getNote():
+                e = self.getEleves()[1]
+            else:
+                e = self.getEleves()[2]
+
+            self.note = self.note - e.getNote()
+
+        print(self.note)
