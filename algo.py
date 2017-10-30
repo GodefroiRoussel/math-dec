@@ -120,27 +120,48 @@ def permutation(e1, e2):
         # On lui attribue le groupe g2, on l'ajoute dans g2
         e1.setGroupe(e2.getGroupe())
         e1.getGroupe().setEleve(e1)
-
+        e1.getGroupe().calculSatisfaction()
         # On enlève e2 de son groupe, on lui attribue le groupe g1, on l'ajoute dans g1
         e2.getGroupe().removeEleve(e2)
         e2.setGroupe(tampon)
         e2.getGroupe().setEleve(e2)
+        e2.getGroupe().calculSatisfaction()
+        return [e2.getGroupe(),e1.getGroupe()]#retourne les 2 groupes permutés
 
 # récupérer le groupe qui à la note la plus petite 
 min_groupe = groupes[0]
-for i in range(1,len(groupes)):
-        if(min_groupe.getNote()>groupes[i].getNote()):
-                min_groupe = groupes[i]
+for groupe in groupes:
+        if(min_groupe.getNote()>groupe.getNote()):
+                min_groupe = groupe
 
 # récupérer l'élève dont la satisfaction est la plus faible
 min_eleve = min_groupe.getEleves()[0]
-for i in range(1,len(min_groupe.getEleves())):
-        if(min_eleve.getNote()>min_groupe.getEleves()[i].getNote()):
-                min_eleve = groupes[i]
+for eleve in min_groupe.getEleves():
+        if(min_eleve.getNote()>eleve.getNote()):
+                min_eleve = eleve
+i = 1
+for groupe in groupes: 
+        print("groupe",i,":", groupe.getNote())
+        i += 1
 
 # intervertir l'élève dont la satisfaction est minimale avec un autre élève d'un autre groupe où la satisfaction est >=
-
-
+for groupe in groupes:
+        if min_groupe != groupe:
+                #dans le cas d'un groupe différent de celui avec qui on veut permuter
+                for eleve in groupe.getEleves():
+                        # on prend l'élève dont la note est supérieur ou égale à notre élève à permuter
+                        if(eleve.getNote()>= min_eleve.getNote()):
+                                #on le permute
+                                l = permutation(min_eleve,eleve)
+                                #si on obtient un meilleur résultat alors on garde la permutation
+                                if(min_groupe.getNote()<=l[0].getNote() or groupe.getNote()>=l[1].getNote()):
+                                        min_groupe = l[0]
+                                        groupe = l[1]
+i = 1
+for groupe in groupes: 
+        print("APRÈS groupe",i,":", groupe.getNote())
+        i += 1
+        
 #print("Après permutation")
 #permutation(e1,e3)
 #for i in range(0,5):
