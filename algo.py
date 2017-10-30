@@ -107,6 +107,22 @@ for i in range(0,5):
         #del eleves[0]
         #del eleves[0]
 
+# récupérer le groupe qui à la note la plus petite 
+def minGroupe(groupes):
+        min_groupe = groupes[0]
+        for groupe in groupes:
+                if(min_groupe.getNote()>groupe.getNote()):
+                        min_groupe = groupe
+        return min_groupe
+
+# récupérer l'élève dont la satisfaction est la plus faible
+def minEleve(groupe):
+        min_eleve = groupe.getEleves()[0]
+        for eleve in groupe.getEleves():
+                if(min_eleve.getNote()>eleve.getNote()):
+                        min_eleve = eleve
+        return min_eleve
+
 def permutation(e1, e2):
         """ Fonction échangeant 2 élèves.
         @In :   e1 = Eleve
@@ -128,21 +144,9 @@ def permutation(e1, e2):
         e2.getGroupe().calculSatisfaction()
         return [e2.getGroupe(),e1.getGroupe()]#retourne les 2 groupes permutés
 
-# récupérer le groupe qui à la note la plus petite 
-min_groupe = groupes[0]
-for groupe in groupes:
-        if(min_groupe.getNote()>groupe.getNote()):
-                min_groupe = groupe
 
-# récupérer l'élève dont la satisfaction est la plus faible
-min_eleve = min_groupe.getEleves()[0]
-for eleve in min_groupe.getEleves():
-        if(min_eleve.getNote()>eleve.getNote()):
-                min_eleve = eleve
-i = 1
-for groupe in groupes: 
-        print("groupe",i,":", groupe.getNote())
-        i += 1
+min_groupe = minGroupe(groupes)
+min_eleve = minEleve(min_groupe)
 
 # intervertir l'élève dont la satisfaction est minimale avec un autre élève d'un autre groupe où la satisfaction est >=
 for groupe in groupes:
@@ -157,17 +161,4 @@ for groupe in groupes:
                                 if(min_groupe.getNote()<=l[0].getNote() or groupe.getNote()>=l[1].getNote()):
                                         min_groupe = l[0]
                                         groupe = l[1]
-i = 1
-for groupe in groupes: 
-        print("APRÈS groupe",i,":", groupe.getNote())
-        i += 1
-        
-#print("Après permutation")
-#permutation(e1,e3)
-#for i in range(0,5):
-        #groupes[i].calculSatisfaction()
 
-#print("Après 2eme permutation")
-#permutation(e1,e3)
-#for i in range(0,5):
-        #groupes[i].calculSatisfaction()
