@@ -129,24 +129,35 @@ def permutation(e1, e2):
                 e2 = Eleve
         @Out :
         """
+        etudiant1 = e1
+        etudiant2 = e2
+        groupe1 = etudiant1.getGroupe()
+        groupe2 = etudiant2.getGroupe()
         # On enlève e1 de son groupe
-        e1.getGroupe().removeEleve(e1)
+        groupe1.removeEleve(etudiant1)
         # On sauvegarde le groupe de e1
-        tampon = e1.getGroupe()
+        tampon = groupe1
         # On lui attribue le groupe g2, on l'ajoute dans g2
-        e1.setGroupe(e2.getGroupe())
-        e1.getGroupe().setEleve(e1)
-        e1.getGroupe().calculSatisfaction()
+        etudiant1.setGroupe(etudiant2.getGroupe())
+        etudiant1.getGroupe().setEleve(etudiant1)
+        groupe1.calculSatisfaction()
         # On enlève e2 de son groupe, on lui attribue le groupe g1, on l'ajoute dans g1
-        e2.getGroupe().removeEleve(e2)
-        e2.setGroupe(tampon)
-        e2.getGroupe().setEleve(e2)
-        e2.getGroupe().calculSatisfaction()
-        return [e2.getGroupe(),e1.getGroupe()]#retourne les 2 groupes permutés
+        groupe2.removeEleve(etudiant2)
+        etudiant2.setGroupe(tampon)
+        etudiant2.getGroupe().setEleve(etudiant2)
+        groupe2.calculSatisfaction()
+        return [groupe2,groupe1]#retourne les 2 groupes permutés
 
 
 min_groupe = minGroupe(groupes)
 min_eleve = minEleve(min_groupe)
+
+i = 0
+for groupe in groupes:
+        print("Groupe ", i+1, "Note :", groupe.getNote())
+        for eleve in groupe.getEleves():
+                print(eleve.getNom())
+        i+=1
 
 # intervertir l'élève dont la satisfaction est minimale avec un autre élève d'un autre groupe où la satisfaction est >=
 for groupe in groupes:
@@ -161,4 +172,11 @@ for groupe in groupes:
                                 if(min_groupe.getNote()<=l[0].getNote() or groupe.getNote()>=l[1].getNote()):
                                         min_groupe = l[0]
                                         groupe = l[1]
-
+print("\n")
+print("APRES")
+i = 0
+for groupe in groupes:
+        print("Groupe ", i+1, "Note :", groupe.getNote())        
+        for eleve in groupe.getEleves():
+                print(eleve.getNom())
+        i+=1
