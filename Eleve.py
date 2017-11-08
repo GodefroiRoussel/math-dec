@@ -22,6 +22,9 @@ class Eleve:
     def getSatisfactions(self):
         return self.mentions
 
+def getRanking(self):
+	return self.liste
+
     def setSatisfaction(self, liste):
         #convertie les satisfactions de l'élève en fonction des valeurs du dictionnaire
         l = []
@@ -56,3 +59,43 @@ class Eleve:
             if (self != eleve and self.S(eleve.getId())<satisfaction):
                 satisfaction = self.S(eleve.getId())    
         self.note = satisfaction
+
+  def trierMentions(self):
+	"""Fonction pour trier les mentions"""
+
+	return self.mentions.sort()
+
+	
+		
+	def trierEleves(self):
+
+	  """ Fonction retournant la liste des eleves triés par ordre croissant selon la satisfaction.
+        @In  :
+        @Out :  liste des eleves triés
+        """
+	eleves = self.getGroupe().getEleves()
+	self.liste=[]
+	self.mentions=trierMentions(self)
+	self.mentions.remove(mention["X"])
+	
+	for eleve in eleves:
+		if (S(e,e1)==mention["TB"])
+		self.liste.append(e1)
+	
+	for eleve in eleves:
+		if (S(e,e1)==mention["B"])
+		self.liste.append(e1)
+	for eleve in eleves:
+		if (S(e,e1)==mention["AB"])
+		self.liste.append(e1)
+	for eleve in eleves:
+		if (S(e,e1)==mention["P"])
+		self.liste.append(e1)
+	for eleve in eleves:
+		if (S(e,e1)==mention["I"])
+		self.liste.append(e1)
+		
+	for eleve in eleves:
+		if (S(e,e1)==mention["AR"])
+		self.liste.append(e1)
+	return self.liste

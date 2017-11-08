@@ -26,16 +26,16 @@ class Groupe:
         L'ordre sera le suivant :
             AR = -130      Toutes les combinaisons avec AR
             I = -50       Toutes les combinaisons avec I
-            P = -10       P + P
-            P+ = 0        AB + P
-            AB-- = 3       B + P
-            AB- = 5    TB + P
+            P = -10      P + P
+            P+ = 0       AB + P
+            AB-- = 3     B + P
+            AB- = 5   	 TB + P
             AB = 10      AB + AB
             AB+ = 13     B + AB
             B- = 15      TB + AB
             B = 16       B + B
             B+ = 18      TB + B
-            TB = 20     TB + TB
+            TB = 20      TB + TB
         """
         self.note = 0
         for eleve in self.eleves:

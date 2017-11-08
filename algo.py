@@ -71,6 +71,27 @@ groupes = []
                 #print("Erreur :", e)
                 #exit()
 
+	#affecter à un eleve un binome ayant avec qui il a une satsifaction binome meilleure que AB--
+for e in eleves:
+	 g1 = Groupe()
+	l=trierEleves(e)
+	b=false
+	j=0
+while(b==false and j< l.length):
+	satisfactionBinome=S(e,l[j])+S(l[j],e)
+	if (satisfactionBinome >mention["AB--"] and (S(e,l[j])==mention["AR"] or S(l[j],e)==mention["AR"] or S(e,l[j])==mention["I"] or S(l[j],e)==mention["I"]  ) ):
+	{
+		b=true
+	}
+	else:
+		{
+		e.setGroupe(g1)
+		l[i].setGroupe(g1)
+		groupes.append(g1)
+		b=true
+			}
+	i++
+
 #TODO: Faire pour tous les binomes et trinomes possibles
 #Ici cela ne concerne que cet exemple précis
 print("Avant permutation")
