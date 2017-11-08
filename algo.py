@@ -72,25 +72,37 @@ groupes = []
                 #exit()
 
 	#affecter à un eleve un binome ayant avec qui il a une satsifaction binome meilleure que AB--
+	elevesBis=eleves 
 for e in eleves:
-	 g1 = Groupe()
-	l=trierEleves(e)
+	g1 = Groupe()
+	l=trierEleves(e) #Trier les eleves
 	b=false
 	j=0
-while(b==false and j< l.length):
-	satisfactionBinome=S(e,l[j])+S(l[j],e)
-	if (satisfactionBinome >mention["AB--"] and (S(e,l[j])==mention["AR"] or S(l[j],e)==mention["AR"] or S(e,l[j])==mention["I"] or S(l[j],e)==mention["I"]  ) ):
-	{
-		b=true
-	}
-	else:
+	while(b==false and j< l.length):
+		satisfactionBinome=S(e,l[j])+S(l[j],e)
+		if (satisfactionBinome >mention["AB--"] and (S(e,l[j])==mention["AR"] or S(l[j],e)==mention["AR"] or S(e,l[j])==mention["I"] or S(l[j],e)==mention["I"]  ) ):
+		{
+		b=false
+		}
+		else:
 		{
 		e.setGroupe(g1)
 		l[i].setGroupe(g1)
 		groupes.append(g1)
+		elevesBis.remove(l[i]) #supprimer l'eleve de la liste pour voir s'il va en rester des eleves pour savoir s'il nous reste des étudiants sans binome, pour faire les trinomes apres
 		b=true
 			}
-	i++
+	j++
+
+for groupe in groupes:
+	for eleve in elevesBis:
+		if (calculSatisfaction(groupe)+ (S(eleve,groupe[0])+S(eleve,groupe[1])+S(groupe[0],eleve)+S(groupe[1],eleve)
+
+
+	
+	
+
+
 
 #TODO: Faire pour tous les binomes et trinomes possibles
 #Ici cela ne concerne que cet exemple précis
