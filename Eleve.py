@@ -2,6 +2,7 @@
 #-*- coding: utf-8 -*-
 
 from mention import mention#dictionnaire des mentions
+from Groupe import *
 
 class Eleve:
 
@@ -9,6 +10,7 @@ class Eleve:
         self.id = id
         self.nom = nom
         self.prenom = prenom
+        self.g = Groupe();
 
     def getId(self):
         return self.id
@@ -60,6 +62,10 @@ class Eleve:
                 satisfaction = self.S(eleve.getId())
         self.note = satisfaction
 
+    def trierMentions(self):
+        """Fonction pour trier les mentions"""
+        return self.mentions.sort()
+
     def trierEleves(self):
         """ Fonction retournant la liste des eleves triés par ordre croissant selon la satisfaction.
         @In  :
@@ -67,8 +73,8 @@ class Eleve:
         """
         eleves = self.getGroupe().getEleves()
     	self.liste=[]
-    	self.mentions=trierMentions(self)
-    	self.mentions.remove(mention["X"])
+    	self.mentions=self.trierMentions()
+    	#self.mentions.remove("X") Bug je ne sais pas pourquoi
 
     	for eleve in eleves:
     		if (S(e,e1)==mention["TB"]):

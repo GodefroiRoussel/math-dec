@@ -75,19 +75,19 @@ groupes = []
 elevesBis=eleves
 for e in eleves:
 	g1 = Groupe()
-	l=trierEleves(e) #Trier les eleves
-	b=false
+	l=e.trierEleves() #Trier les eleves
+	b=False
 	j=0
-	while(b==false and j< l.length):
+	while(b==False and j< len(l)):
 		satisfactionBinome=S(e,l[j])+S(l[j],e)
 		if (satisfactionBinome >mention["AB--"] and (S(e,l[j])==mention["AR"] or S(l[j],e)==mention["AR"] or S(e,l[j])==mention["I"] or S(l[j],e)==mention["I"]  ) ):
-			b=false
+			b=False
 		else:
 			e.setGroupe(g1)
 			l[i].setGroupe(g1)
 			groupes.append(g1)
 			elevesBis.remove(l[i]) #supprimer l'eleve de la liste pour voir s'il va en rester des eleves pour savoir s'il nous reste des étudiants sans binome, pour faire les trinomes apres
-			b=true
+			b=True
 		j = j + 1
 
 for groupe in groupes:
