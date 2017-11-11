@@ -71,8 +71,8 @@ groupes = []
                 #print("Erreur :", e)
                 #exit()
 
-	#affecter à un eleve un binome ayant avec qui il a une satsifaction binome meilleure que AB--
-	elevesBis=eleves 
+
+elevesBis=eleves
 for e in eleves:
 	g1 = Groupe()
 	l=trierEleves(e) #Trier les eleves
@@ -81,26 +81,20 @@ for e in eleves:
 	while(b==false and j< l.length):
 		satisfactionBinome=S(e,l[j])+S(l[j],e)
 		if (satisfactionBinome >mention["AB--"] and (S(e,l[j])==mention["AR"] or S(l[j],e)==mention["AR"] or S(e,l[j])==mention["I"] or S(l[j],e)==mention["I"]  ) ):
-		{
-		b=false
-		}
+			b=false
 		else:
-		{
-		e.setGroupe(g1)
-		l[i].setGroupe(g1)
-		groupes.append(g1)
-		elevesBis.remove(l[i]) #supprimer l'eleve de la liste pour voir s'il va en rester des eleves pour savoir s'il nous reste des étudiants sans binome, pour faire les trinomes apres
-		b=true
-			}
-	j++
+			e.setGroupe(g1)
+			l[i].setGroupe(g1)
+			groupes.append(g1)
+			elevesBis.remove(l[i]) #supprimer l'eleve de la liste pour voir s'il va en rester des eleves pour savoir s'il nous reste des étudiants sans binome, pour faire les trinomes apres
+			b=true
+		j = j + 1
 
 for groupe in groupes:
 	for eleve in elevesBis:
-		if (calculSatisfaction(groupe)+ (S(eleve,groupe[0])+S(eleve,groupe[1])+S(groupe[0],eleve)+S(groupe[1],eleve)
+		if (calculSatisfaction(groupe)+ (S(eleve,groupe[0])+S(eleve,groupe[1])+S(groupe[0],eleve)+S(groupe[1],eleve) ) ):
+			print("test")
 
-
-	
-	
 
 
 
@@ -140,7 +134,7 @@ for i in range(0,5):
         #del eleves[0]
         #del eleves[0]
 
-# récupérer le groupe qui à la note la plus petite 
+# récupérer le groupe qui à la note la plus petite
 def minGroupe(groupes):
         min_groupe = groupes[0]
         for groupe in groupes:
@@ -209,7 +203,7 @@ print("\n")
 print("APRES")
 i = 0
 for groupe in groupes:
-        print("Groupe ", i+1, "Note :", groupe.getNote())        
+        print("Groupe ", i+1, "Note :", groupe.getNote())
         for eleve in groupe.getEleves():
                 print(eleve.getNom())
         i+=1
