@@ -11,6 +11,7 @@ class Eleve:
         self.nom = nom
         self.prenom = prenom
         self.g = Groupe();
+        self.listeTriee = []
 
     def getId(self):
         return self.id
@@ -23,6 +24,8 @@ class Eleve:
 
     def getRanking(self):
         return self.liste
+    def getListeTriee(self):
+        return self.listeTriee
 
     def getSatisfactions(self):
         return self.mentions
@@ -66,34 +69,30 @@ class Eleve:
         """Fonction pour trier les mentions"""
         return self.mentions.sort()
 
-    def trierEleves(self):
-        """ Fonction retournant la liste des eleves triés par ordre croissant selon la satisfaction.
+    def trierEleves(self, eleves):
+        """ Fonction retournant la liste des eleves triés par ordre décroissant selon la satisfaction.
         @In  :
         @Out :  liste des eleves triés
         """
-        eleves = self.getGroupe().getEleves()
-    	self.liste=[]
-    	self.mentions=self.trierMentions()
-    	#self.mentions.remove("X") Bug je ne sais pas pourquoi
-
-    	for eleve in eleves:
-    		if (S(e,e1)==mention["TB"]):
-    		      self.liste.append(e1)
-
-    	for eleve in eleves:
-    		if (S(e,e1)==mention["B"]):
-    		      self.liste.append(e1)
-    	for eleve in eleves:
-    		if (S(e,e1)==mention["AB"]):
-    		      self.liste.append(e1)
-    	for eleve in eleves:
-    		if (S(e,e1)==mention["P"]):
-    		      self.liste.append(e1)
-    	for eleve in eleves:
-    		if (S(e,e1)==mention["I"]):
-    		      self.liste.append(e1)
-
-    	for eleve in eleves:
-    		if (S(e,e1)==mention["AR"]):
-    		      self.liste.append(e1)
-        return self.liste
+     
+        
+        for eleve in eleves:
+                if (self.S(eleve.id)==mention["TB"]):
+                     self.listeTriee.append(eleve)
+                    
+        for eleve in eleves:
+                if (self.S(eleve.id)==mention["B"]):
+                     self.listeTriee.append(eleve)
+        for eleve in eleves:
+                if (self.S(eleve.id)==mention["AB"]):
+                     self.listeTriee.append(eleve)
+        for eleve in eleves:
+                if (self.S(eleve.id)==mention["P"]):
+                     self.listeTriee.append(eleve)
+        for eleve in eleves:
+                if (self.S(eleve.id)==mention["I"]):
+                     self.listeTriee.append(eleve)
+        for eleve in eleves:
+                if (self.S(eleve.id)==mention["AR"]):
+                       self.listeTriee.append(eleve)
+        return self.listeTriee

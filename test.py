@@ -99,3 +99,14 @@ print("On effectue encore une permutation sur e1 et e3 pour vérifier que notre 
 permutation(e1,e3)
 for i in range(0,5):
         groupes[i].calculSatisfaction()
+
+
+
+print("\n")
+print("\n")
+
+print(" Je trie les choix pour un eleve")
+e.trierEleves(eleves)
+for eleve in e.listeTriee:
+        print(eleve.id)
+
