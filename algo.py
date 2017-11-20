@@ -89,6 +89,8 @@ for e in eleves:
                         elevesBis.remove(l[j]) #supprimer l'eleve de la liste pour voir s'il va en rester des eleves pour savoir s'il nous reste des étudiants sans binome, pour faire les trinomes apres
                         b=True
                         j = j + 1
+
+
 #TODO: Faire pour tous les binomes et trinomes possibles
 #Ici cela ne concerne que cet exemple précis
 print("Avant permutation")
