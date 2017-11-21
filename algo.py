@@ -77,7 +77,7 @@ elevesChoisis=[]
 l=[]
 for e in eleves:
         l.append(e.trierEleves(eleves))
-
+        
  #Trier les eleves
 
 g1 = Groupe()
@@ -85,7 +85,7 @@ j=0
 i=0
 for e in eleves:
       
-      k=0
+      
       c=0
       b=False
       while(j<len(l) and b==False):
@@ -97,37 +97,40 @@ for e in eleves:
                               e.setGroupe(g1)
                               l[j][i].setGroupe(g1)
                               groupes.append(g1)
-                              #print(e.id)
-                              #print(l[j][i].id)
+                              print(e.id,l[j][i].id)
+                              
                               elevesChoisis.append(e)
                               elevesChoisis.append(l[j][i])
                               b=True
+                              e
+                        for eleve in eleves: #je supprime les eleves choisis de la liste des eleves
+                                  if (eleve.id==l[j][i].id):
+                                      eleves.remove(l[j][i])
+                                  if (eleve.id==e.id):
+                                      eleves.remove(e)
                         i=i+1   
                               
                    j=j+1
-      for eleve in eleves: #je supprime les eleves choisis de la liste des eleves
-                                  if (eleve.id==elevesChoisis[0].id):
-                                      eleves.remove(elevesChoisis[0])
-                                  if (eleve.id==elevesChoisis[1].id):
-                                      eleves.remove(elevesChoisis[1])
-                                      
-      while(c<len(l)): #je supprime les eleves choisis de tous les tris
-                    while(k<len(l[c])):
-                                        print(c,k)
-                                        if(elevesChoisis[0].id==l[c][k].id):
-                                            print("hi")
-                                            l[c].remove(l[c][k])
-                                        if (elevesChoisis[1].id==l[c][k].id):
-                                            l[c].remove(l[c][k])
-                                        k=k+1
-                    c=c+1 
+                        
+                                 
+      k=0     
+      c=0                           
+      while(k<len(l)):
+                    while(c<len(l[k])):
                                         
-                        
-   
-                  #supprimer l'eleve de la liste pour voir s'il va en rester des eleves pour savoir s'il nous reste des étudiants sans binome, pour faire les trinomes apres
-                        
-                            
-       
+                                        #print(len(eleveS))
+                                        #print(elevesChoisis[0].id,eleveS[k].id)
+                                        if(elevesChoisis[0].id==l[k][c].id):
+                                            
+                                            l[k].remove(l[k][c])
+                                        if (elevesChoisis[1].id==l[k][c].id):
+                                            
+                                            l[k].remove(l[k][c])
+                                            
+                                        c=c+1
+                    k=k+1
+                 
+
 #TODO: Faire pour tous les binomes et trinomes possibles
 #Ici cela ne concerne que cet exemple précis
 print("Avant permutation")
@@ -236,5 +239,7 @@ for groupe in groupes:
         print("Groupe ", i+1, "Note :", groupe.getNote())        
         for eleve in groupe.getEleves():
                 print(eleve.getNom())
-        i+=1   
-
+        i+=1
+                                        
+                        
+   
