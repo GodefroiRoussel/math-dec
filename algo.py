@@ -73,24 +73,61 @@ groupes = []
 
 
 elevesBis=eleves
+elevesChoisis=[]
+l=[]
 for e in eleves:
-        g1 = Groupe()
-        l=e.trierEleves(eleves) #Trier les eleves
-        b=False
-        j=0
-        while(b==False and j< len(l)):
-                satisfactionBinome=l[j].S(e.id)+e.S(l[j].id)
-                if (satisfactionBinome >mention["AB--"] and (e.S(l[j].id)==mention["AR"] or l[j].S(e.id)==mention["AR"] or e.S(l[j].id)==mention["I"] or l[j].S(e.id)==mention["I"]  ) ):
-                        b=False
-                else:
-                        e.setGroupe(g1)
-                        l[j].setGroupe(g1)
-                        groupes.append(g1)
-                        elevesBis.remove(l[j]) #supprimer l'eleve de la liste pour voir s'il va en rester des eleves pour savoir s'il nous reste des étudiants sans binome, pour faire les trinomes apres
-                        b=True
-                        j = j + 1
+        l.append(e.trierEleves(eleves))
 
+ #Trier les eleves
 
+g1 = Groupe()
+j=0
+i=0
+for e in eleves:
+      
+      k=0
+      c=0
+      b=False
+      while(j<len(l) and b==False):
+                   while(i<len(l[j]) and b==False):
+                        satisfactionBinome=l[j][i].S(e.id) + e.S(l[j][i].id)
+                        if(satisfactionBinome >mention["AB--"] and (e.S(l[j][i].id)==mention["AR"] or l[j][i].S(e.id)==mention["AR"] or e.S(l[j][i].id)==mention["I"] or l[j][i].S(e.id)==mention["I"]) ):
+                                  b=False
+                        else:
+                              e.setGroupe(g1)
+                              l[j][i].setGroupe(g1)
+                              groupes.append(g1)
+                              #print(e.id)
+                              #print(l[j][i].id)
+                              elevesChoisis.append(e)
+                              elevesChoisis.append(l[j][i])
+                              b=True
+                        i=i+1   
+                              
+                   j=j+1
+      for eleve in eleves: #je supprime les eleves choisis de la liste des eleves
+                                  if (eleve.id==elevesChoisis[0].id):
+                                      eleves.remove(elevesChoisis[0])
+                                  if (eleve.id==elevesChoisis[1].id):
+                                      eleves.remove(elevesChoisis[1])
+                                      
+      while(c<len(l)): #je supprime les eleves choisis de tous les tris
+                    while(k<len(l[c])):
+                                        print(c,k)
+                                        if(elevesChoisis[0].id==l[c][k].id):
+                                            print("hi")
+                                            l[c].remove(l[c][k])
+                                        if (elevesChoisis[1].id==l[c][k].id):
+                                            l[c].remove(l[c][k])
+                                        k=k+1
+                    c=c+1 
+                                        
+                        
+   
+                  #supprimer l'eleve de la liste pour voir s'il va en rester des eleves pour savoir s'il nous reste des étudiants sans binome, pour faire les trinomes apres
+                        
+                            
+       
 #TODO: Faire pour tous les binomes et trinomes possibles
 #Ici cela ne concerne que cet exemple précis
 print("Avant permutation")
@@ -127,7 +164,7 @@ for i in range(0,5):
         #del eleves[0]
         #del eleves[0]
 
-# récupérer le groupe qui à la note la plus petite
+# récupérer le groupe qui à la note la plus petite 
 def minGroupe(groupes):
         min_groupe = groupes[0]
         for groupe in groupes:
@@ -196,10 +233,8 @@ print("\n")
 print("APRES")
 i = 0
 for groupe in groupes:
-        print("Groupe ", i+1, "Note :", groupe.getNote())
+        print("Groupe ", i+1, "Note :", groupe.getNote())        
         for eleve in groupe.getEleves():
                 print(eleve.getNom())
-        i+=1
-		
-
+        i+=1   
 

@@ -74,8 +74,6 @@ class Eleve:
         @In  :
         @Out :  liste des eleves triés
         """
-     
-        
         for eleve in eleves:
                 if (self.S(eleve.id)==mention["TB"]):
                      self.listeTriee.append(eleve)
