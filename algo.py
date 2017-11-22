@@ -85,25 +85,26 @@ elevesU=eleves
 elevesAffectes=[]
 for e in eleves:
         #print(e.id)
-        g1 = Groupe()
+ 
         j=0
         i=0
         b=False
         while(j<len(l) and b==False):
                 while((l[j][i] in elevesAffectes)==False and i<len(l[j]) and b==False):
-                        satisfactionBinome=l[j][i].S(e.id) + e.S(l[j][i].id)
+                        g1=Groupe()
+                        e.setGroupe(g1)
+                        l[j][i].setGroupe(g1) 
+                        g1.eleves.append(l[j][i])
+                        g1.eleves.append(e)
+                        satisfactionBinome=g1.calculSatisfaction()
                         #print((l[j][i] in elevesAffectes)==False,i<len(l[j]),b==False)
                         if(satisfactionBinome<mention["AB--"] ):
                                   b=False
-
                         else:
-                              e.setGroupe(g1)
-                              l[j][i].setGroupe(g1)
+                              
                               elevesAffectes.append(e)
                               elevesAffectes.append(l[j][i])
-                              l[j][i].setGroupe(g1)
-                              g1.eleves.append(l[j][i])
-                              g1.eleves.append(e)
+                              
                               groupes.append(g1)
                               print(e.id,l[j][i].id,satisfactionBinome)
                               print("ca marche")
@@ -130,7 +131,7 @@ if (len(elevesAffectes)!=len(elevesU)): #Pas tous les eleves affectes
                 gProvisoire.eleves.append(e)
                 satisfactionBinome=g.eleves[1].S(g.eleves[0].id) + g.eleves[0].S(g.eleves[1].id)
                 print(gProvisoire.eleves[0].id,gProvisoire.eleves[1].id,gProvisoire.eleves[2].id,satisfactionBinome,gProvisoire.calculSatisfaction(),len(gProvisoire.eleves))
-                if (satisfactionBinome<=gProvisoire.calculSatisfaction() and d==False and len(g.eleves)<3):
+                if ((satisfactionBinome<=gProvisoire.calculSatisfaction() or gProvisoire.calculSatisfaction()>=mention["P"])  and d==False and len(g.eleves)<3 ):
                     d=True
                     e.setGroupe(g)
                     #print(g.eleves[0].id)
@@ -141,8 +142,11 @@ if (len(elevesAffectes)!=len(elevesU)): #Pas tous les eleves affectes
 
 
 for g in groupes:
+    if (len(g.eleves)==2):
+        print(g.eleves[0].id,g.eleves[1].id,g.calculSatisfaction())
     if (len(g.eleves)==3):
-        print(g.eleves[0].id,g.eleves[2].id,g.eleves[1].id,g.calculSatisfaction())
+        print(g.eleves[0].id,g.eleves[1].id,g.eleves[2].id,g.calculSatisfaction())
+
 
         #TODO: Faire pour tous les binomes et trinomes possibles
 #Ici cela ne concerne que cet exemple précis
@@ -253,3 +257,7 @@ for groupe in groupes:
         for eleve in groupe.getEleves():
                 print(eleve.getNom())
         i+=1
+
+
+
+    

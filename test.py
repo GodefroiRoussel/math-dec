@@ -108,5 +108,16 @@ print("\n")
 print(" Je trie les choix pour un eleve")
 e.trierEleves(eleves)
 for eleve in e.listeTriee:
-        print(eleve.id)
+print(eleve.id)
+
+gb=Groupe()
+e1.setGroupe(gb)
+e5.setGroupe(gb)
+e7.setGroupe(gb)
+gb.eleves.append(e1)
+gb.eleves.append(e5)
+gb.eleves.append(e7)
+
+print("je teste calcul satisfaction")
+print(gb.calculSatisfactionBis())
 

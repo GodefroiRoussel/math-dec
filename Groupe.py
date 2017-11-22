@@ -19,7 +19,7 @@ class Groupe:
         self.eleves.remove(eleve)
 
     # Correspond à setNote
-    def calculSatisfaction(self):
+    def calculSatisfactionBis(self):
         """ Fonction calculant la satisfaction de ce groupe
         @In :
         @Out :
@@ -53,3 +53,12 @@ class Groupe:
 
             self.note = self.note - e.getNote()
             return self.note
+
+    def calculSatisfaction(self):
+        vote01=(self.eleves[0].S(self.eleves[1].id)+self.eleves[1].S(self.eleves[0].id))/2
+        if (len(self.eleves)==2):
+           return vote01
+        if (len(self.eleves)==3):
+           vote02=(self.eleves[0].S(self.eleves[2].id)+self.eleves[2].S(self.eleves[0].id))/2
+           vote12=(self.eleves[1].S(self.eleves[2].id)+self.eleves[2].S(self.eleves[1].id))/2
+           return (vote02+vote01+vote12)/3
