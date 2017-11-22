@@ -46,6 +46,7 @@ class Eleve:
 
     def setGroupe(self, groupe):
         self.g = groupe
+        
 
     def getGroupe(self):
         return self.g

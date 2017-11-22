@@ -52,5 +52,4 @@ class Groupe:
                 e = self.getEleves()[2]
 
             self.note = self.note - e.getNote()
-
-
+            return self.note
