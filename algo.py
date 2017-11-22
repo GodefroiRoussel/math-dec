@@ -128,26 +128,23 @@ if (len(elevesAffectes)!=len(elevesU)): #Pas tous les eleves affectes
                 gProvisoire.eleves.append(g.eleves[0])
                 gProvisoire.eleves.append(g.eleves[1])
                 gProvisoire.eleves.append(e)
-                print(gProvisoire.eleves[0].id,gProvisoire.eleves[1].id,gProvisoire.eleves[2].id)
-                print(g.calculSatisfaction(),gProvisoire.calculSatisfaction())
-                if (g.calculSatisfaction()<=gProvisoire.calculSatisfaction() and d==False and len(g.eleves)<3):
+                satisfactionBinome=g.eleves[1].S(g.eleves[0].id) + g.eleves[0].S(g.eleves[1].id)
+                print(gProvisoire.eleves[0].id,gProvisoire.eleves[1].id,gProvisoire.eleves[2].id,satisfactionBinome,gProvisoire.calculSatisfaction(),len(gProvisoire.eleves))
+                if (satisfactionBinome<=gProvisoire.calculSatisfaction() and d==False and len(g.eleves)<3):
                     d=True
                     e.setGroupe(g)
                     #print(g.eleves[0].id)
                     g.eleves.append(e)
-                    #print("done")
+                    print("done")
                     #print(min(e.S(eleves[1].id)+eleves[1].S(e.id),e.S(eleves[0].id)+eleves[0].S(e.id)))
                     #print(e.id)
 
 
 for g in groupes:
-    #print("hi")
-    w=0
-    while(w<len(g.eleves)):
-        #print(g.eleves[w].id,g.calculSatisfaction())
-        w=w+1
+    if (len(g.eleves)==3):
+        print(g.eleves[0].id,g.eleves[2].id,g.eleves[1].id,g.calculSatisfaction())
 
-#TODO: Faire pour tous les binomes et trinomes possibles
+        #TODO: Faire pour tous les binomes et trinomes possibles
 #Ici cela ne concerne que cet exemple précis
 print("Avant permutation")
 for i in range(0,5):
