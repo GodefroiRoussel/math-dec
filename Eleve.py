@@ -94,3 +94,19 @@ class Eleve:
                 if (self.S(eleve.id)==mention["AR"]):
                        self.listeTriee.append(eleve)
         return self.listeTriee
+    def SuppEleve(self, eleves):
+      k=0     
+      c=0 
+      while(k<len(l)):
+                    while(c<len(l[k]) ):
+                                        print(c,k)
+                                        #print(elevesChoisis[0].id,eleveS[k].id)
+                                        if(elevesChoisis[0].id==l[k][c].id):
+                                            l[k].remove(l[k][c])
+                                        if (elevesChoisis[1].id==l[k][c].id):
+                                            l[k].remove(l[k][c])
+                                            print(len(l[k]))
+                                            
+                                        c=c+1
+                    k=k+1
+                  

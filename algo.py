@@ -91,45 +91,37 @@ for e in eleves:
       while(j<len(l) and b==False):
                    while(i<len(l[j]) and b==False):
                         satisfactionBinome=l[j][i].S(e.id) + e.S(l[j][i].id)
-                        if(satisfactionBinome >mention["AB--"] and (e.S(l[j][i].id)==mention["AR"] or l[j][i].S(e.id)==mention["AR"] or e.S(l[j][i].id)==mention["I"] or l[j][i].S(e.id)==mention["I"]) ):
+                        if(satisfactionBinome<mention["AB--"] ):
                                   b=False
+                                  print(e.id,l[j][i].id,satisfactionBinome)
                         else:
+                              print(mention["AB--"])
                               e.setGroupe(g1)
                               l[j][i].setGroupe(g1)
                               groupes.append(g1)
-                              print(e.id,l[j][i].id)
-                              
-                              elevesChoisis.append(e)
-                              elevesChoisis.append(l[j][i])
+                              print(e.id,l[j][i].id,satisfactionBinome)
+                              elevesChoisis1=e
+                              elevesChoisis2=l[j][i]
                               b=True
-                              e
-                        for eleve in eleves: #je supprime les eleves choisis de la liste des eleves
-                                  if (eleve.id==l[j][i].id):
-                                      eleves.remove(l[j][i])
-                                  if (eleve.id==e.id):
-                                      eleves.remove(e)
+                              l=[]
+                              g=0
+                              for el in eleves:
+                                   while(g<len(el.listeTriee)):
+                                      if (el.listeTriee[g].id==elevesChoisis1.id):
+                                          el.listeTriee.remove(elevesChoisis1)
+                                      if (el.listeTriee[g].id==elevesChoisis2.id):
+                                          el.listeTriee.remove(elevesChoisis2)
+                                      l.append(el.listeTriee)      
+                                      g=g+1
+                              for eleve in eleves: #je supprime les eleves choisis de la liste des eleves
+                                  if (eleve.id==elevesChoisis1.id):
+                                      eleves.remove(elevesChoisis1)
+                                  if (eleve.id==elevesChoisis2.id):
+                                      eleves.remove(elevesChoisis2)
+                       
+                              
                         i=i+1   
                               
-                   j=j+1
-                        
-                                 
-      k=0     
-      c=0                           
-      while(k<len(l)):
-                    while(c<len(l[k])):
-                                        
-                                        #print(len(eleveS))
-                                        #print(elevesChoisis[0].id,eleveS[k].id)
-                                        if(elevesChoisis[0].id==l[k][c].id):
-                                            
-                                            l[k].remove(l[k][c])
-                                        if (elevesChoisis[1].id==l[k][c].id):
-                                            
-                                            l[k].remove(l[k][c])
-                                            
-                                        c=c+1
-                    k=k+1
-                 
 
 #TODO: Faire pour tous les binomes et trinomes possibles
 #Ici cela ne concerne que cet exemple précis
@@ -240,6 +232,6 @@ for groupe in groupes:
         for eleve in groupe.getEleves():
                 print(eleve.getNom())
         i+=1
-                                        
-                        
-   
+                   j=j+1
+                   
+
