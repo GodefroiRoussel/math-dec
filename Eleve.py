@@ -77,7 +77,7 @@ class Eleve:
         for eleve in eleves:
                 if (self.S(eleve.id)==mention["TB"]):
                      self.listeTriee.append(eleve)
-                    
+
         for eleve in eleves:
                 if (self.S(eleve.id)==mention["B"]):
                      self.listeTriee.append(eleve)
@@ -94,19 +94,7 @@ class Eleve:
                 if (self.S(eleve.id)==mention["AR"]):
                        self.listeTriee.append(eleve)
         return self.listeTriee
-    def SuppEleve(self, eleves):
-      k=0     
-      c=0 
-      while(k<len(l)):
-                    while(c<len(l[k]) ):
-                                        print(c,k)
-                                        #print(elevesChoisis[0].id,eleveS[k].id)
-                                        if(elevesChoisis[0].id==l[k][c].id):
-                                            l[k].remove(l[k][c])
-                                        if (elevesChoisis[1].id==l[k][c].id):
-                                            l[k].remove(l[k][c])
-                                            print(len(l[k]))
-                                            
-                                        c=c+1
-                    k=k+1
-                  
+    def Appartient(self, elevesAffectes):
+      for e in elevesAffectes:
+          if ((e.id==self.id) and (len(elevesAffectes)>0)):
+              return True

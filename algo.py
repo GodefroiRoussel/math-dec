@@ -77,51 +77,42 @@ elevesChoisis=[]
 l=[]
 for e in eleves:
         l.append(e.trierEleves(eleves))
-        
+
  #Trier les eleves
 
 g1 = Groupe()
 j=0
 i=0
+elevesAffectes=[]
 for e in eleves:
-      
-      
-      c=0
-      b=False
-      while(j<len(l) and b==False):
-                   while(i<len(l[j]) and b==False):
+        b=False
+        while(j<len(l) and b==False):
+                while(i<len(l[j]) and b==False and not(l[j][i].Appartient(elevesAffectes))):
                         satisfactionBinome=l[j][i].S(e.id) + e.S(l[j][i].id)
                         if(satisfactionBinome<mention["AB--"] ):
                                   b=False
                                   print(e.id,l[j][i].id,satisfactionBinome)
                         else:
-                              print(mention["AB--"])
+
                               e.setGroupe(g1)
+                              l[j][i].setGroupe(g1)
+                              elevesAffectes.append(e)
+                              elevesAffectes.append(l[j][i])
                               l[j][i].setGroupe(g1)
                               groupes.append(g1)
                               print(e.id,l[j][i].id,satisfactionBinome)
                               elevesChoisis1=e
                               elevesChoisis2=l[j][i]
                               b=True
-                              l=[]
-                              g=0
-                              for el in eleves:
-                                   while(g<len(el.listeTriee)):
-                                      if (el.listeTriee[g].id==elevesChoisis1.id):
-                                          el.listeTriee.remove(elevesChoisis1)
-                                      if (el.listeTriee[g].id==elevesChoisis2.id):
-                                          el.listeTriee.remove(elevesChoisis2)
-                                      l.append(el.listeTriee)      
-                                      g=g+1
                               for eleve in eleves: #je supprime les eleves choisis de la liste des eleves
                                   if (eleve.id==elevesChoisis1.id):
                                       eleves.remove(elevesChoisis1)
                                   if (eleve.id==elevesChoisis2.id):
                                       eleves.remove(elevesChoisis2)
-                       
-                              
-                        i=i+1   
-                              
+
+
+                        i=i+1
+        j=j+1
 
 #TODO: Faire pour tous les binomes et trinomes possibles
 #Ici cela ne concerne que cet exemple précis
@@ -159,7 +150,7 @@ for i in range(0,5):
         #del eleves[0]
         #del eleves[0]
 
-# récupérer le groupe qui à la note la plus petite 
+# récupérer le groupe qui à la note la plus petite
 def minGroupe(groupes):
         min_groupe = groupes[0]
         for groupe in groupes:
@@ -228,10 +219,7 @@ print("\n")
 print("APRES")
 i = 0
 for groupe in groupes:
-        print("Groupe ", i+1, "Note :", groupe.getNote())        
+        print("Groupe ", i+1, "Note :", groupe.getNote())
         for eleve in groupe.getEleves():
                 print(eleve.getNom())
         i+=1
-                   j=j+1
-                   
-
