@@ -96,5 +96,7 @@ class Eleve:
         return self.listeTriee
     def Appartient(self, elevesAffectes):
       for e in elevesAffectes:
-          if ((e.id==self.id) and (len(elevesAffectes)>0)):
+          if ((e.id==self.id) and len(elevesAffectes)>0):
               return True
+          else:
+              return False

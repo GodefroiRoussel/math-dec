@@ -81,19 +81,21 @@ for e in eleves:
  #Trier les eleves
 
 g1 = Groupe()
-j=0
-i=0
+elevesU=eleves
 elevesAffectes=[]
 for e in eleves:
+        #print(e.id)
+        j=0
+        i=0
         b=False
         while(j<len(l) and b==False):
-                while(i<len(l[j]) and b==False and not(l[j][i].Appartient(elevesAffectes))):
+                while((l[j][i] in elevesAffectes)==False and i<len(l[j]) and b==False):
                         satisfactionBinome=l[j][i].S(e.id) + e.S(l[j][i].id)
+                        #print((l[j][i] in elevesAffectes)==False,i<len(l[j]),b==False)
                         if(satisfactionBinome<mention["AB--"] ):
                                   b=False
-                                  print(e.id,l[j][i].id,satisfactionBinome)
-                        else:
 
+                        else:
                               e.setGroupe(g1)
                               l[j][i].setGroupe(g1)
                               elevesAffectes.append(e)
@@ -101,19 +103,23 @@ for e in eleves:
                               l[j][i].setGroupe(g1)
                               groupes.append(g1)
                               print(e.id,l[j][i].id,satisfactionBinome)
+                              print("ca marche")
                               elevesChoisis1=e
                               elevesChoisis2=l[j][i]
                               b=True
                               for eleve in eleves: #je supprime les eleves choisis de la liste des eleves
-                                  if (eleve.id==elevesChoisis1.id):
-                                      eleves.remove(elevesChoisis1)
                                   if (eleve.id==elevesChoisis2.id):
                                       eleves.remove(elevesChoisis2)
 
-
                         i=i+1
-        j=j+1
+                j=j+1
+if (len(elevesAffectes)!=len(elevesU)): #Pas tous les eleves affectes
+        elevesRestants=[value for value in elevesU if value not in elevesAffectes]
+        for e in elevesRestants:
+            for g in groupes:
 
+                if (g.getNote()<e.S(eleves[1])+e.S(eleves[0])+eleves[0].S(e)+eleves[1].S(e)):
+                    e.setGroupe(g1)
 #TODO: Faire pour tous les binomes et trinomes possibles
 #Ici cela ne concerne que cet exemple précis
 print("Avant permutation")
