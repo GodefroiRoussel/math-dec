@@ -59,6 +59,15 @@ class Groupe:
         if (len(self.eleves)==2):
            return vote01
         if (len(self.eleves)==3):
-           vote02=(self.eleves[0].S(self.eleves[2].id)+self.eleves[2].S(self.eleves[0].id))/2
-           vote12=(self.eleves[1].S(self.eleves[2].id)+self.eleves[2].S(self.eleves[1].id))/2
-           return (vote02+vote01+vote12)/3
+           vote=[]
+           vote.append(self.eleves[0].S(self.eleves[2].id))
+           vote.append(self.eleves[1].S(self.eleves[2].id))
+           vote.append(self.eleves[2].S(self.eleves[0].id))
+           vote.append(self.eleves[2].S(self.eleves[1].id))
+           vote.append(self.eleves[0].S(self.eleves[1].id))
+           vote.append(self.eleves[1].S(self.eleves[0].id))
+           votemin1=min(vote)
+           vote.remove(votemin1)
+           votemin2=min(vote)
+           #print(votemin1,votemin2)
+           return max(votemin1,votemin2)
