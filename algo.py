@@ -113,6 +113,8 @@ for e in eleves:
                               b=True
                               for eleve in eleves: #je supprime les eleves choisis de la liste des eleves
                                   if (eleve.id==elevesChoisis2.id):
+
+
                                       eleves.remove(elevesChoisis2)
 
                         i=i+1
@@ -129,9 +131,8 @@ if (len(elevesAffectes)!=len(elevesU)): #Pas tous les eleves affectes
                 gProvisoire.eleves.append(g.eleves[0])
                 gProvisoire.eleves.append(g.eleves[1])
                 gProvisoire.eleves.append(e)
-                satisfactionBinome=g.eleves[1].S(g.eleves[0].id) + g.eleves[0].S(g.eleves[1].id)
-                print(gProvisoire.eleves[0].id,gProvisoire.eleves[1].id,gProvisoire.eleves[2].id,satisfactionBinome,gProvisoire.calculSatisfaction(),len(gProvisoire.eleves))
-                if ((satisfactionBinome<=gProvisoire.calculSatisfaction() or gProvisoire.calculSatisfaction()>=mention["P"])  and d==False and len(g.eleves)<3 ):
+                #print(gProvisoire.eleves[0].id,gProvisoire.eleves[1].id,gProvisoire.eleves[2].id,g.calculSatisfaction(),g.calculSatisfaction(),len(gProvisoire.eleves))
+                if ((g.calculSatisfaction()<=gProvisoire.calculSatisfaction() or gProvisoire.calculSatisfaction()>=mention["P"])  and d==False and len(g.eleves)<3 ):
                     d=True
                     e.setGroupe(g)
                     #print(g.eleves[0].id)
@@ -147,8 +148,7 @@ for g in groupes:
     if (len(g.eleves)==3):
         print(g.eleves[0].id,g.eleves[1].id,g.eleves[2].id,g.calculSatisfaction())
 
-
-        #TODO: Faire pour tous les binomes et trinomes possibles
+ #TODO: Faire pour tous les binomes et trinomes possibles
 #Ici cela ne concerne que cet exemple précis
 print("Avant permutation")
 for i in range(0,5):
@@ -259,5 +259,3 @@ for groupe in groupes:
         i+=1
 
 
-
-    
