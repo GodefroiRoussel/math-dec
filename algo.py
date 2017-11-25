@@ -25,6 +25,13 @@ print("Nombre d'élève :" , n)
 print("Trinomes: " , nbTrinome)
 print("Binomes: " , nbBinome)
 
+
+def satisfactionGenerale(groupes):
+     sg=0
+     for groupe in groupes:
+		sg=sg+groupe.getNote()
+     return sg
+
 #TODO: Un système pour rentrer manuellement les données et non pas dans le code
 
 e1 = Eleve(1,"Godefroi","Roussel")
@@ -83,9 +90,10 @@ for e in eleves:
 
 elevesU=eleves
 elevesAffectes=[]
+elevesChoisis=[]
 for e in eleves:
         #print(e.id)
- 
+    if (not (e in elevesAffectes)):
         j=0
         i=0
         b=False
@@ -104,18 +112,12 @@ for e in eleves:
                               
                               elevesAffectes.append(e)
                               elevesAffectes.append(l[j][i])
-                              
                               groupes.append(g1)
-                              print(e.id,l[j][i].id,satisfactionBinome)
-                              print("ca marche")
+                              #print(e.id,l[j][i].id,satisfactionBinome)
+                              #print("ca marche")
                               elevesChoisis1=e
                               elevesChoisis2=l[j][i]
                               b=True
-                              for eleve in eleves: #je supprime les eleves choisis de la liste des eleves
-                                  if (eleve.id==elevesChoisis2.id):
-
-
-                                      eleves.remove(elevesChoisis2)
 
                         i=i+1
                 j=j+1
@@ -140,17 +142,18 @@ if (len(elevesAffectes)!=len(elevesU)): #Pas tous les eleves affectes
                     print("done")
                     #print(min(e.S(eleves[1].id)+eleves[1].S(e.id),e.S(eleves[0].id)+eleves[0].S(e.id)))
                     #print(e.id)
-
+"""
 
 for g in groupes:
     if (len(g.eleves)==2):
         print(g.eleves[0].id,g.eleves[1].id,g.calculSatisfaction())
     if (len(g.eleves)==3):
-        print(g.eleves[0].id,g.eleves[1].id,g.eleves[2].id,g.calculSatisfaction())
+        print(g.eleves[0].id,g.eleves[1].id,g.eleves[2].id,g.calculSatisfaction())"""
 
  #TODO: Faire pour tous les binomes et trinomes possibles
 #Ici cela ne concerne que cet exemple précis
 print("Avant permutation")
+"""
 for i in range(0,5):
         g = Groupe()
         eleves[0].setGroupe(g)
@@ -160,7 +163,7 @@ for i in range(0,5):
         groupes.append(g)
         del eleves[0]
         del eleves[0]
-        g.calculSatisfaction()
+        g.calculSatisfaction()"""
 
 #for i in range(0,nbTrinome):
         #g = Groupe()
@@ -194,13 +197,13 @@ def minGroupe(groupes):
 
 # récupérer l'élève dont la satisfaction est la plus faible
 def minEleve(groupe):
-        min_eleve = groupe.getEleves()[0]
+        min_eleve = groupe.eleves[0]
         for eleve in groupe.getEleves():
                 if(min_eleve.getNote()>eleve.getNote()):
                         min_eleve = eleve
         return min_eleve
 
-def permutation(e1, e2):
+def permutation(e1, e2,groupesProvisoire):
         """ Fonction échangeant 2 élèves.
         @In :   e1 = Eleve
                 e2 = Eleve
@@ -211,20 +214,20 @@ def permutation(e1, e2):
         groupe1 = etudiant1.getGroupe()
         groupe2 = etudiant2.getGroupe()
         # On enlève e1 de son groupe
-        groupe1.removeEleve(etudiant1)
+        groupe2.eleves.remove(etudiant2)
+
         # On sauvegarde le groupe de e1
         tampon = groupe1
         # On lui attribue le groupe g2, on l'ajoute dans g2
         etudiant1.setGroupe(etudiant2.getGroupe())
         etudiant1.getGroupe().setEleve(etudiant1)
-        groupe1.calculSatisfaction()
+        #groupe1.calculSatisfaction()
         # On enlève e2 de son groupe, on lui attribue le groupe g1, on l'ajoute dans g1
-        groupe2.removeEleve(etudiant2)
+        groupe1.eleves.remove(etudiant1)
         etudiant2.setGroupe(tampon)
         etudiant2.getGroupe().setEleve(etudiant2)
-        groupe2.calculSatisfaction()
-        return [groupe2,groupe1]#retourne les 2 groupes permutés
-
+      
+        return groupesProvisoire
 
 min_groupe = minGroupe(groupes)
 min_eleve = minEleve(min_groupe)
@@ -233,11 +236,36 @@ i = 0
 for groupe in groupes:
         print("Groupe ", i+1, "Note :", groupe.getNote())
         for eleve in groupe.getEleves():
-                print(eleve.getNom())
+                print(eleve.id)
         i+=1
 
+print(satisfactionGenerale(groupes))
+
+
+sfg=satisfactionGenerale(groupes)
+groupesProvisoire=groupes
+
+
+
+#for eleve in elevesBis:
+	#print(eleve.id)
+
+for eleve in elevesBis:
+    for groupe in groupes:
+          for e in groupe.eleves:
+                  if(e!=eleve):
+                    groupesProvisoire=permutation(eleve,e,groupesProvisoire)
+                    #print(sfg,satisfactionGenerale(groupesProvisoire))
+                    #print(eleve.id,groupe.eleves[i].id)
+                    #print(satisfactionGenerale(groupesProvisoire))
+                    if (sfg<satisfactionGenerale(groupesProvisoire)):
+                 	  sfg=satisfactionGenerale(groupesProvisoire)
+                    else:
+                      groupesProvisoire=permutation(e,eleve,groupesProvisoire)
+print("apres la permutation")
+
 # intervertir l'élève dont la satisfaction est minimale avec un autre élève d'un autre groupe où la satisfaction est >=
-for groupe in groupes:
+""""for groupe in groupes:
         if min_groupe != groupe:
                 #dans le cas d'un groupe différent de celui avec qui on veut permuter
                 for eleve in groupe.getEleves():
@@ -248,14 +276,17 @@ for groupe in groupes:
                                 #si on obtient un meilleur résultat alors on garde la permutation
                                 if(min_groupe.getNote()<=l[0].getNote() or groupe.getNote()>=l[1].getNote()):
                                         min_groupe = l[0]
-                                        groupe = l[1]
-print("\n")
+                                        groupe = l[1]"""
+"""print("\n")
 print("APRES")
-i = 0
+i = 0"""
 for groupe in groupes:
         print("Groupe ", i+1, "Note :", groupe.getNote())
         for eleve in groupe.getEleves():
-                print(eleve.getNom())
+                print(eleve.id)
         i+=1
 
 
+print(satisfactionGenerale(groupes))
+
+#

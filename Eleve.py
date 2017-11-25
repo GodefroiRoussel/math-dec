@@ -13,6 +13,7 @@ class Eleve:
         self.prenom = prenom
         self.g = Groupe();
         self.listeTriee = []
+        self.note=0
 
     def getId(self):
         return self.id
@@ -52,9 +53,6 @@ class Eleve:
         return self.g
 
     def getNote(self):
-        return self.note
-
-    def calculNote(self):
         """ Fonction retournant la note d'un élève par rapport à son groupe. C'est-à-dire sa satisfaction minimale.
         @In  :
         @Out :  note de l'élève comprise entre 0 et 10
@@ -65,6 +63,8 @@ class Eleve:
             if (self != eleve and self.S(eleve.getId())<satisfaction):
                 satisfaction = self.S(eleve.getId())
         self.note = satisfaction
+
+        return self.note
 
     def trierMentions(self):
         """Fonction pour trier les mentions"""
