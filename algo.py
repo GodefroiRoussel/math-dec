@@ -105,15 +105,16 @@ for e in eleves:
 
  #Trier les eleves
 
-
-elevesU=eleves
-elevesAffectes=[]
-elevesChoisis=[]
-for e in eleves:
+def faireBinomes(eleves): #former des binomes
+  elevesU=eleves
+  elevesAffectes=[]
+  elevesChoisis=[]
+  for e in eleves:
         #print(e.id)
     if (not (e in elevesAffectes)):
         j=0
         i=0
+        m=0
         b=False
         while(j<len(l) and b==False):
                 while((l[j][i] in elevesAffectes)==False and i<len(l[j]) and b==False):
@@ -123,11 +124,10 @@ for e in eleves:
                         g1.eleves.append(l[j][i])
                         g1.eleves.append(e)
                         satisfactionBinome=g1.calculSatisfaction()
-                        
                         #print((l[j][i] in elevesAffectes)==False,i<len(l[j]),b==False)
                         if(satisfactionBinome<mention["AB--"] ):
                                   b=False
-                        else:
+                        elif (m<18): #si je dépasse pas 18 groupes
                               
                               elevesAffectes.append(e)
                               elevesAffectes.append(l[j][i])
@@ -136,40 +136,46 @@ for e in eleves:
                               #print("ca marche")
                               elevesChoisis1=e
                               elevesChoisis2=l[j][i]
+                              m+=1
                               b=True
 
                         i=i+1
                 j=j+1
+
+  return elevesAffectes
+
+elevesAffectes=faireBinomes(eleves)
+elevesU=eleves
 elevesRestants=[value for value in elevesU if value not in elevesAffectes]
 
-
-if(len(elevesRestants)%2!=0 and len(elevesRestants)>1): 
-	i=0
-	while(i<len(elevesRestants)-1):
-		g=Groupe()
-		elevesRestants[i].setGroupe(g)
-		elevesRestants[i+1].setGroupe(g)
-		g.append(elevesRestants[i])
-		g.apprend(elevesRestants[i+1])
-		groupes.append(g)
-		i+=1
-	affecterUnEleve(elevesRestants[i])
-elif ((len(elevesRestants)%2==0) and len(elevesRestants)>1):
-	i=0
-	while(i<len(elevesRestants)-1):
-		g=Groupe()
-		elevesRestants[i].setGroupe(g)
-		elevesRestants[i+1].setGroupe(g)
-		g.eleves.append(elevesRestants[i])
-		g.eleves.append(elevesRestants[i+1])
-		groupes.append(g)
-		i+=1
-elif (len(elevesRestants)==1):
-	  affecterUnEleve(elevesRestants[0])
+if(n<=36):
+    if(len(elevesRestants)%2!=0 and len(elevesRestants)>1 ): #s'il reste plus d'un joueur
+      	i=0
+       	while(i<len(elevesRestants)-1):
+		        g=Groupe()
+		        elevesRestants[i].setGroupe(g)
+		        elevesRestants[i+1].setGroupe(g)
+		        g.append(elevesRestants[i])
+		        g.apprend(elevesRestants[i+1])
+		        groupes.append(g)
+	         	i+=1
+        affecterUnEleve(elevesRestants[i])
+    elif ((len(elevesRestants)%2==0) and len(elevesRestants)>1):
+ 	       i=0
+ 	       while(i<len(elevesRestants)-1):
+ 	          	g=Groupe()
+ 	          	elevesRestants[i].setGroupe(g)
+ 	          	elevesRestants[i+1].setGroupe(g)
+ 	           	g.eleves.append(elevesRestants[i])
+ 	          	g.eleves.append(elevesRestants[i+1])
+ 	          	groupes.append(g)
+	          	i+=1  
+    elif (len(elevesRestants)==1):
+	         affecterUnEleve(elevesRestants[0])
+elif(n>36): 
+  for e in elevesRestants:
+    affecterUnEleve(e)
  
-
-
-
 """
 
 for g in groupes:
@@ -279,12 +285,11 @@ groupesProvisoire=groupes
 	#print(eleve.id)
 
 for eleve in elevesBis:
-    for groupe in groupes:
-          for e in groupe.eleves:
-                  if(e!=eleve):
+          for e in elevesBis:
+                  if(e!=eleve and e.g!=eleve.g):
                     groupesProvisoire=permutation(eleve,e,groupesProvisoire)
                     #print(sfg,satisfactionGenerale(groupesProvisoire))
-                    #print(eleve.id,groupe.eleves[i].id)
+                    print(eleve.id,e.id,satisfactionGenerale(groupesProvisoire))
                     #print(satisfactionGenerale(groupesProvisoire))
                     if (sfg<satisfactionGenerale(groupesProvisoire)):
                  	  sfg=satisfactionGenerale(groupesProvisoire)
