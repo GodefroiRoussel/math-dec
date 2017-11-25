@@ -79,6 +79,24 @@ groupes = []
                 #exit()
 
 
+def affecterUnEleve(eleve):
+   eleveAajouter=e
+   #print(eleveAajouter.id)
+   d=False
+   for g in groupes:
+      gProvisoire=Groupe()
+      gProvisoire.eleves.append(g.eleves[0])
+      gProvisoire.eleves.append(g.eleves[1])
+      gProvisoire.eleves.append(e)
+      #print(gProvisoire.eleves[0].id,gProvisoire.eleves[1].id,gProvisoire.eleves[2].id,g.calculSatisfaction(),g.calculSatisfaction(),len(gProvisoire.eleves))
+      if ((g.calculSatisfaction()<=gProvisoire.calculSatisfaction() or gProvisoire.calculSatisfaction()>=mention["P"])  and d==False and len(g.eleves)<3 ):
+         d=True
+         e.setGroupe(g)
+         #print(g.eleves[0].id)
+         g.eleves.append(e)
+         #print(min(e.S(eleves[1].id)+eleves[1].S(e.id),e.S(eleves[0].id)+eleves[0].S(e.id)))
+         #print(e.id)
+
 elevesBis=eleves
 elevesChoisis=[]
 l=[]
@@ -105,6 +123,7 @@ for e in eleves:
                         g1.eleves.append(l[j][i])
                         g1.eleves.append(e)
                         satisfactionBinome=g1.calculSatisfaction()
+                        
                         #print((l[j][i] in elevesAffectes)==False,i<len(l[j]),b==False)
                         if(satisfactionBinome<mention["AB--"] ):
                                   b=False
@@ -121,27 +140,36 @@ for e in eleves:
 
                         i=i+1
                 j=j+1
-if (len(elevesAffectes)!=len(elevesU)): #Pas tous les eleves affectes
-        elevesRestants=[value for value in elevesU if value not in elevesAffectes]
-        for e in elevesRestants:
-            #print(elevesRestants[0].id,elevesRestants[1].id)
-            eleveAajouter=e
-            #print(eleveAajouter.id)
-            d=False
-            for g in groupes:
-                gProvisoire=Groupe()
-                gProvisoire.eleves.append(g.eleves[0])
-                gProvisoire.eleves.append(g.eleves[1])
-                gProvisoire.eleves.append(e)
-                #print(gProvisoire.eleves[0].id,gProvisoire.eleves[1].id,gProvisoire.eleves[2].id,g.calculSatisfaction(),g.calculSatisfaction(),len(gProvisoire.eleves))
-                if ((g.calculSatisfaction()<=gProvisoire.calculSatisfaction() or gProvisoire.calculSatisfaction()>=mention["P"])  and d==False and len(g.eleves)<3 ):
-                    d=True
-                    e.setGroupe(g)
-                    #print(g.eleves[0].id)
-                    g.eleves.append(e)
-                    print("done")
-                    #print(min(e.S(eleves[1].id)+eleves[1].S(e.id),e.S(eleves[0].id)+eleves[0].S(e.id)))
-                    #print(e.id)
+elevesRestants=[value for value in elevesU if value not in elevesAffectes]
+
+
+if(len(elevesRestants)%2!=0 and len(elevesRestants)>1): 
+	i=0
+	while(i<len(elevesRestants)-1):
+		g=Groupe()
+		elevesRestants[i].setGroupe(g)
+		elevesRestants[i+1].setGroupe(g)
+		g.append(elevesRestants[i])
+		g.apprend(elevesRestants[i+1])
+		groupes.append(g)
+		i+=1
+	affecterUnEleve(elevesRestants[i])
+elif ((len(elevesRestants)%2==0) and len(elevesRestants)>1):
+	i=0
+	while(i<len(elevesRestants)-1):
+		g=Groupe()
+		elevesRestants[i].setGroupe(g)
+		elevesRestants[i+1].setGroupe(g)
+		g.eleves.append(elevesRestants[i])
+		g.eleves.append(elevesRestants[i+1])
+		groupes.append(g)
+		i+=1
+elif (len(elevesRestants)==1):
+	  affecterUnEleve(elevesRestants[0])
+ 
+
+
+
 """
 
 for g in groupes:
