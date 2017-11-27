@@ -29,7 +29,7 @@ print("Binomes: " , nbBinome)
 def satisfactionGenerale(groupes):
      sg=0
      for groupe in groupes:
-		sg=sg+groupe.getNote()
+             sg=sg+groupe.getNote()
      return sg
 
 #TODO: Un système pour rentrer manuellement les données et non pas dans le code
@@ -149,29 +149,29 @@ elevesU=eleves
 elevesRestants=[value for value in elevesU if value not in elevesAffectes]
 
 if(n<=36):
-    if(len(elevesRestants)%2!=0 and len(elevesRestants)>1 ): #s'il reste plus d'un joueur
-      	i=0
-       	while(i<len(elevesRestants)-1):
-		        g=Groupe()
-		        elevesRestants[i].setGroupe(g)
-		        elevesRestants[i+1].setGroupe(g)
-		        g.append(elevesRestants[i])
-		        g.apprend(elevesRestants[i+1])
-		        groupes.append(g)
-	         	i+=1
-        affecterUnEleve(elevesRestants[i])
-    elif ((len(elevesRestants)%2==0) and len(elevesRestants)>1):
- 	       i=0
- 	       while(i<len(elevesRestants)-1):
- 	          	g=Groupe()
- 	          	elevesRestants[i].setGroupe(g)
- 	          	elevesRestants[i+1].setGroupe(g)
- 	           	g.eleves.append(elevesRestants[i])
- 	          	g.eleves.append(elevesRestants[i+1])
- 	          	groupes.append(g)
-	          	i+=1  
-    elif (len(elevesRestants)==1):
-	         affecterUnEleve(elevesRestants[0])
+        if(len(elevesRestants)%2!=0 and len(elevesRestants)>1 ): #s'il reste plus d'un joueur
+                i=0
+                while(i<len(elevesRestants)-1):
+                        g=Groupe()
+                        elevesRestants[i].setGroupe(g)
+                        elevesRestants[i+1].setGroupe(g)
+                        g.append(elevesRestants[i])
+                        g.apprend(elevesRestants[i+1])
+                        groupes.append(g)
+                        i+=1
+                affecterUnEleve(elevesRestants[i])
+        elif ((len(elevesRestants)%2==0) and len(elevesRestants)>1):
+                i=0
+                while(i<len(elevesRestants)-1):
+                        g=Groupe()
+                        elevesRestants[i].setGroupe(g)
+                        elevesRestants[i+1].setGroupe(g)
+                        g.eleves.append(elevesRestants[i])
+                        g.eleves.append(elevesRestants[i+1])
+                        groupes.append(g)
+                        i+=1  
+        elif (len(elevesRestants)==1):
+                affecterUnEleve(elevesRestants[0])
 elif(n>36): 
   for e in elevesRestants:
     affecterUnEleve(e)
@@ -292,7 +292,7 @@ for eleve in elevesBis:
                     print(eleve.id,e.id,satisfactionGenerale(groupesProvisoire))
                     #print(satisfactionGenerale(groupesProvisoire))
                     if (sfg<satisfactionGenerale(groupesProvisoire)):
-                 	  sfg=satisfactionGenerale(groupesProvisoire)
+                            sfg=satisfactionGenerale(groupesProvisoire)
                     else:
                       groupesProvisoire=permutation(e,eleve,groupesProvisoire)
 print("apres la permutation")
