@@ -56,13 +56,18 @@ class Groupe:
             return self.note
 
     def calculSatisfaction(self):
-        vote01=(self.eleves[0].S(self.eleves[1].id)+self.eleves[1].S(self.eleves[0].id))/2
-        if (len(self.eleves)==2):
-        	self.note=vote01
-        if (len(self.eleves)==3):
-           
-           vote02=(self.eleves[0].S(self.eleves[2].id)+ self.eleves[2].S(self.eleves[0].id))/2
-           vote12=(self.eleves[1].S(self.eleves[2].id)+ self.eleves[2].S(self.eleves[1].id))/2
-          
-           self.note=(vote01+vote02+vote12)/3
+        self.note = 0
+        for e in self.eleves:
+            self.note = self.note + e.getNote()
+            #Si le groupe est un trinôme alors on ne fait le calcul qu'avec les 2 élèves ayant la plus petite mention.
+            if len(self.getEleves()) == 3:
+                if self.getEleves()[0].getNote() >= self.getEleves()[1].getNote() and self.getEleves()[0].getNote() >= self.getEleves()[2].getNote():                         
+                    e = self.getEleves()[0]
+                elif self.getEleves()[1].getNote() >= self.getEleves()[0].getNote() and self.getEleves()[1].getNote() >= self.getEleves()[2].getNote():
+                    e = self.getEleves()[1]
+                else:
+                    e = self.getEleves()[2]
+
+        self.note = self.note - e.getNote()
+        self.note = self.note / 2
         return self.note

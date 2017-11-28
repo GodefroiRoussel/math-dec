@@ -8,22 +8,7 @@ from Groupe import *
 
 # Initialisation des données
 
-#print("Veuillez entrer le nombre d'étudiants :")
-#n = int(input())
-n = 37
 
-nbTrinome = n // 3
-#s'il nous reste une personne orphelin on enlève un trinome pour former des binomes à la place
-if(n-nbTrinome*3 == 1):
-        nbTrinome-=1
-
-#nbTrinome = 0
-nbBinome = (n - nbTrinome*3) // 2
-#nbBinome = 5
-
-print("Nombre d'élève :" , n)
-print("Trinomes: " , nbTrinome)
-print("Binomes: " , nbBinome)
 
 
 def satisfactionGenerale(groupes):
@@ -261,6 +246,19 @@ def permutation(e1, e2,groupesProvisoire):
       
         return groupesProvisoire
 
+def listeGroupesMin(groupes):
+	""" Fonction retournant une liste des groupes ayant une satisfaction minimale
+	@In :
+	@Out : listeGroupesMin = liste
+	"""
+	groupeMin = minGroupe(groupes)
+	listeGroupesMin = []
+	for groupe in groupes:
+		if (groupe.calculSatisfaction() == groupeMin.calculSatisfaction()):
+			listeGroupesMin.append(groupe)
+	return listeGroupesMin
+###################### Fin des fonctions #####################""
+
 min_groupe = minGroupe(groupes)
 min_eleve = minEleve(min_groupe)
 
@@ -274,27 +272,47 @@ print("LA SATISFACTION DU GROUPE EST :")
 
 print(satisfactionGenerale(groupes))
 
-
+# Initialisation
 sfg=satisfactionGenerale(groupes)
 groupesProvisoire=groupes
 
-
+satisfactionG = -5401 #satisfaction générale dans le pire des cas cad 18 * -300
 
 #for eleve in elevesBis:
 	#print(eleve.id)
+while(sfg > satisfactionG):
+	#On définit la satisfaction générale comme étant celle à améliorer
+	satisfactionG = sfg
+	listeGMin = listeGroupesMin(groupesProvisoire) #Récupére tous les groupes ayant la satisfaction minimum du groupe
+	#Pour tous les groupes : On calcule la satisfaction minimale de ce groupe puis on prend l'élève minimum 
+	#pour effectuer des permutations
+	for groupe in listeGMin:
+		sGroupeMin = groupe.calculSatisfaction()
+		min_eleve = minEleve(min_groupe)
+		for eleve in elevesBis:
+			# On permute l'élève minimum avec un élève ne faisant pas parti de son groupe
+			if(min_eleve.g!=eleve.g):
+				groupesProvisoire=permutation(eleve,min_eleve,groupesProvisoire)
+				#print(sfg,satisfactionGenerale(groupesProvisoire))
+				#print(eleve.id,e.id,satisfactionGenerale(groupesProvisoire))
+				#print(satisfactionGenerale(groupesProvisoire))
 
-for eleve in elevesBis:
-          for e in elevesBis:
-                  if(e!=eleve and e.g!=eleve.g):
-                    groupesProvisoire=permutation(eleve,e,groupesProvisoire)
-                    #print(sfg,satisfactionGenerale(groupesProvisoire))
-                    #print(eleve.id,e.id,satisfactionGenerale(groupesProvisoire))
-                    #print(satisfactionGenerale(groupesProvisoire))
-                    if (sfg<satisfactionGenerale(groupesProvisoire)):
-                 	  sfg=satisfactionGenerale(groupesProvisoire)
-                    else:
-                      groupesProvisoire=permutation(e,eleve,groupesProvisoire)
-print("apres la permutation")
+				#Calculer les satisfactions des 2 nouveaux groupes
+				sAncienGroupeMin = eleve.getGroupe().calculSatisfaction()
+				sNouveauGroupe = min_eleve.getGroupe().calculSatisfaction()
+
+				#Si la satisfaction des nouveaux groupes est supérieure à la satisfaction de l'ancien groupe min
+				if (sAncienGroupeMin>=sGroupeMin and sNouveauGroupe >= sGroupeMin):
+					#On calcule la satisfaction générale provisoire et on vérifie si cette satisfaction est supérieure à celle que l'on doit améliorer
+					sfgProvisoire = satisfactionGenerale(groupesProvisoire)
+					if (sfg<sfgProvisoire):
+						# On définit la nouvelle satisfaction à améliorer et on sauvegarde la configuration des groupes
+						sfg=sfgProvisoire
+						nouvelleSolution = copy.deepcopy(groupesProvisoire) #CAREFULL
+					#On revient dans tous les cas aux groupes qu'on essaie d'améliorer afin de voir si une nouvelle meilleure solution est possible
+					groupesProvisoire=permutation(min_eleve,eleve,groupesProvisoire)
+
+print("apres l'algo")
 
 # intervertir l'élève dont la satisfaction est minimale avec un autre élève d'un autre groupe où la satisfaction est >=
 """"for groupe in groupes:
