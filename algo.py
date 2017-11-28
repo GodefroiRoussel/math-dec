@@ -14,7 +14,7 @@ from Groupe import *
 def satisfactionGenerale(groupes):
      sg=0
      for groupe in groupes:
-		sg=sg+groupe.getNote()
+             sg=sg+groupe.getNote()
      return sg
 
 #TODO: Un système pour rentrer manuellement les données et non pas dans le code
@@ -42,26 +42,6 @@ e10.setSatisfaction(["AB","TB","TB","I","TB","P","AB","B","P","X"])
 
 eleves = [e1, e2, e3, e4, e5, e6, e7, e8, e9, e10]
 groupes = []
-
-#eleves = []
-#for i in range(0, n):
-        #print("Entrer le nom :" )
-        #nom = input()
-        #print("Entrer le prénom :")
-        #prenom = input()
-        #e = Eleve(i+1,prenom,nom)
-        #try:
-                #print("Entrer les mentions sur les autres éléves séparées par des virgules [TB,B,AB,P,I,AR] :")
-                #mentions = input().upper().split(',')
-                #mentions = mentions[:i]+["X"]+mentions[i:] #ajouter une note pour soi même
-                #if(len(mentions)!=n):
-                        #raise Exception("Il manque des mentions")
-                #e.setSatisfaction(mentions)
-                #print(mentions)
-                #eleves.append(e)
-        #except Exception as e : #vérifier que la taille est de n
-                #print("Erreur :", e)
-                #exit()
 
 
 def affecterUnEleve(eleve):
@@ -280,6 +260,7 @@ satisfactionG = -5401 #satisfaction générale dans le pire des cas cad 18 * -30
 
 #for eleve in elevesBis:
 	#print(eleve.id)
+
 while(sfg > satisfactionG):
 	#On définit la satisfaction générale comme étant celle à améliorer
 	satisfactionG = sfg
