@@ -105,11 +105,11 @@ for e in eleves:
 
  #Trier les eleves
 
-def faireBinomes(eleves): #former des binomes
-  elevesU=eleves
-  elevesAffectes=[]
-  elevesChoisis=[]
-  for e in eleves:
+ #former des binomes
+elevesU=eleves
+elevesAffectes=[]
+elevesChoisis=[]
+for e in eleves:
         #print(e.id)
     if (not (e in elevesAffectes)):
         j=0
@@ -128,7 +128,6 @@ def faireBinomes(eleves): #former des binomes
                         if(satisfactionBinome<mention["AB--"] ):
                                   b=False
                         elif (m<18): #si je dépasse pas 18 groupes
-                              
                               elevesAffectes.append(e)
                               elevesAffectes.append(l[j][i])
                               groupes.append(g1)
@@ -142,16 +141,15 @@ def faireBinomes(eleves): #former des binomes
                         i=i+1
                 j=j+1
 
-  return elevesAffectes
 
-elevesAffectes=faireBinomes(eleves)
+
 elevesU=eleves
 elevesRestants=[value for value in elevesU if value not in elevesAffectes]
 
-if(n<=36):
+if(m<18):
     if(len(elevesRestants)%2!=0 and len(elevesRestants)>1 ): #s'il reste plus d'un joueur
       	i=0
-       	while(i<len(elevesRestants)-1):
+       	while(i<len(elevesRestants)-1 and m<18 ):
 		        g=Groupe()
 		        elevesRestants[i].setGroupe(g)
 		        elevesRestants[i+1].setGroupe(g)
@@ -162,7 +160,7 @@ if(n<=36):
         affecterUnEleve(elevesRestants[i])
     elif ((len(elevesRestants)%2==0) and len(elevesRestants)>1):
  	       i=0
- 	       while(i<len(elevesRestants)-1):
+ 	       while(i<len(elevesRestants)-1 and m<18):
  	          	g=Groupe()
  	          	elevesRestants[i].setGroupe(g)
  	          	elevesRestants[i+1].setGroupe(g)
@@ -172,7 +170,7 @@ if(n<=36):
 	          	i+=1  
     elif (len(elevesRestants)==1):
 	         affecterUnEleve(elevesRestants[0])
-elif(n>36): 
+elif(m==18): 
   for e in elevesRestants:
     affecterUnEleve(e)
  
@@ -270,8 +268,9 @@ i = 0
 for groupe in groupes:
         print("Groupe ", i+1, "Note :", groupe.getNote())
         for eleve in groupe.getEleves():
-                print(eleve.id)
+                print(eleve.nom)
         i+=1
+print("LA SATISFACTION DU GROUPE EST :")
 
 print(satisfactionGenerale(groupes))
 
@@ -289,7 +288,7 @@ for eleve in elevesBis:
                   if(e!=eleve and e.g!=eleve.g):
                     groupesProvisoire=permutation(eleve,e,groupesProvisoire)
                     #print(sfg,satisfactionGenerale(groupesProvisoire))
-                    print(eleve.id,e.id,satisfactionGenerale(groupesProvisoire))
+                    #print(eleve.id,e.id,satisfactionGenerale(groupesProvisoire))
                     #print(satisfactionGenerale(groupesProvisoire))
                     if (sfg<satisfactionGenerale(groupesProvisoire)):
                  	  sfg=satisfactionGenerale(groupesProvisoire)
@@ -311,15 +310,15 @@ print("apres la permutation")
                                         min_groupe = l[0]
                                         groupe = l[1]"""
 """print("\n")
-print("APRES")
-i = 0"""
+print("APRES")"""
+i = 0
 for groupe in groupes:
         print("Groupe ", i+1, "Note :", groupe.getNote())
         for eleve in groupe.getEleves():
-                print(eleve.id)
+                print(eleve.nom)
         i+=1
 
-
+print("LA SATISFACTION DU GROUPE EST :")
 print(satisfactionGenerale(groupes))
 
 #
