@@ -14,7 +14,8 @@ class Eleve:
         self.g = Groupe();
         self.listeTriee = []
         self.note=0
-
+        self.mentions=[]
+        
     def getId(self):
         return self.id
 

@@ -51,19 +51,19 @@ def convertToInt(matrice):
         tmp = []
         for y in range(0, np.shape(matrice)[0]):
             if(matrice[x][y] == "-1"):
-                tmp.append(-1)
+                tmp.append(-300)
             elif(matrice[x][y] == "TB"):
-                tmp.append(5)
+                tmp.append(20)
             elif(matrice[x][y] == "B"):
-                tmp.append(4)
+                tmp.append(16)
             elif(matrice[x][y] == "AB"):
-                tmp.append(3)
+                tmp.append(10)
             elif(matrice[x][y] == "P"):
-                tmp.append(2)
+                tmp.append(-10)
             elif(matrice[x][y] == "I"):
-                tmp.append(1)
+                tmp.append(-50)
             elif(matrice[x][y] == "AR"):
-                tmp.append(0)
+                tmp.append(-130)
             else:
                 print("error", matrice[x][y])
         res.append(tmp)
@@ -105,7 +105,7 @@ def matriceAleatoire(size):
                 matrice[x][y] = (int)(matrice[x][y] * 5)
     return matrice
 
-
+""""
 ''' EXEMPLE D'UTILISATION '''
 res = parseCSV(sys.argv[1])
 
@@ -139,4 +139,4 @@ repartition = np.array([[1, 2],
 writeCsv("csv2.csv", repartition)
 
 print("Matrice aleatoire de taille 12 : ")
-print(matriceAleatoire(12))
+print(matriceAleatoire(12))"""
