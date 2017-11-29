@@ -265,7 +265,7 @@ def permutation(e1, e2,groupesProvisoire):
 i = 0
 
 for groupe in groupes:
-        print("\n\nGroupe ", i+1, " -> Satisfaction :", groupe.getNote(), end='\n[ ')        
+        print("\n\nGroupe ", i+1, " -> Satisfaction :", groupe.getNote(), end="\n[ ")        
         for eleve in groupe.getEleves():
                 print(eleve.prenom, end=' ')                
         i+=1
@@ -315,7 +315,7 @@ print("APRES")"""
 i = 0
 
 for groupe in groupesProvisoire:
-        print("\n\nGroupe ", i+1, " -> Satisfaction :", groupe.getNote(), end='\n[ ')
+        print("\n\nGroupe ", i+1, " -> Satisfaction :", groupe.getNote(), end="\n[ ")
         for eleve in groupe.getEleves():
                 print(eleve.prenom, end=' ')
         i+=1
