@@ -129,20 +129,20 @@ elevesRestantsAff=[]
 
 if(m<18):
     if(len(elevesRestants)%2!=0 and len(elevesRestants)>1 ): #s'il reste plus d'un joueur
-      	i=0
-       	while(i<len(elevesRestants) and m<18 ):
-          if(not(elevesRestants[i] in elevesRestantsAff) ):
-                  g=Groupe()
-                  elevesRestants[i].setGroupe(g)
-                  elevesRestants[i+1].setGroupe(g)
-                  g.eleves.append(elevesRestants[i])
-                  g.eleves.append(elevesRestants[i+1])
-                  elevesRestantsAff.append(elevesRestants[i])
-                  elevesRestantsAff.append(elevesRestants[i+1])
-                  groupes.append(g)
-                  print("il reste ",len(elevesRestants)-len(elevesRestantsAff) ,"a affecter")
-                  m=m+1
-          i+=1
+        i=0
+        while(i<len(elevesRestants) and m<18 ):
+                if(not(elevesRestants[i] in elevesRestantsAff) ):
+                        g=Groupe()
+                        elevesRestants[i].setGroupe(g)
+                        elevesRestants[i+1].setGroupe(g)
+                        g.eleves.append(elevesRestants[i])
+                        g.eleves.append(elevesRestants[i+1])
+                        elevesRestantsAff.append(elevesRestants[i])
+                        elevesRestantsAff.append(elevesRestants[i+1])
+                        groupes.append(g)
+                        print("il reste ",len(elevesRestants)-len(elevesRestantsAff) ,"a affecter")
+                        m=m+1
+                i+=1
 
     elif ((len(elevesRestants)%2==0) and len(elevesRestants)>1):
          i=0
