@@ -111,7 +111,7 @@ for e in eleves:
                               elevesAffectes.append(e)
                               elevesAffectes.append(l[j][i])
                               groupes.append(g1)
-                              print(e.id,l[j][i].id,satisfactionBinome)
+                              #print(e.id,l[j][i].id,satisfactionBinome)
                               m=m+1
                               #print("ca marche")
                               elevesChoisis1=e
@@ -265,11 +265,12 @@ def permutation(e1, e2,groupesProvisoire):
 i = 0
 
 for groupe in groupes:
-        print("Groupe ", i+1, "Note :", groupe.getNote())
+        print("\n\nGroupe ", i+1, " -> Satisfaction :", groupe.getNote(), end='\n[ ')        
         for eleve in groupe.getEleves():
-                print(eleve.prenom)
+                print(eleve.prenom, end=' ')                
         i+=1
-print("LA SATISFACTION DU GROUPE EST :")
+        print("]")
+print("\n\nLA SATISFACTION GENERALE EST DE:")
 
 print(satisfactionGenerale(groupes))
 groupesProvisoire=groupes
@@ -314,12 +315,13 @@ print("APRES")"""
 i = 0
 
 for groupe in groupesProvisoire:
-        print("Groupe ", i+1, "Note :", groupe.getNote())
+        print("\n\nGroupe ", i+1, " -> Satisfaction :", groupe.getNote(), end='\n[ ')
         for eleve in groupe.getEleves():
-                print(eleve.prenom)
+                print(eleve.prenom, end=' ')
         i+=1
+        print("]")
 
-print("LA SATISFACTION DU GROUPE EST :")
+print("\n\nLA SATISFACTION GENERALE EST DE :")
 print(satisfactionGenerale(groupes))
 
 #
