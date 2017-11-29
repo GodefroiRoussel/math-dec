@@ -267,7 +267,7 @@ i = 0
 for groupe in groupes:
         print("\n\nGroupe ", i+1, " -> Satisfaction :", groupe.getNote(), end="\n[ ")        
         for eleve in groupe.getEleves():
-                print(eleve.prenom, end=' ')                
+                print(eleve.prenom, sep="", end=" ")                
         i+=1
         print("]")
 print("\n\nLA SATISFACTION GENERALE EST DE:")
@@ -317,7 +317,7 @@ i = 0
 for groupe in groupesProvisoire:
         print("\n\nGroupe ", i+1, " -> Satisfaction :", groupe.getNote(), end="\n[ ")
         for eleve in groupe.getEleves():
-                print(eleve.prenom, end=' ')
+                print(eleve.prenom, sep="", end=" ")
         i+=1
         print("]")
 
