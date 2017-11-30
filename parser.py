@@ -1,7 +1,7 @@
 import csv
 import numpy as np
 import sys
-
+from mention import *
 '''
 	File = String pointant sur le fichier csv de la forme :
 		-1,B,AB
@@ -50,20 +50,9 @@ def convertToInt(matrice):
     for x in range(0, np.shape(matrice)[0]):
         tmp = []
         for y in range(0, np.shape(matrice)[0]):
-            if(matrice[x][y] == "-1"):
-                tmp.append(-300)
-            elif(matrice[x][y] == "TB"):
-                tmp.append(20)
-            elif(matrice[x][y] == "B"):
-                tmp.append(16)
-            elif(matrice[x][y] == "AB"):
-                tmp.append(10)
-            elif(matrice[x][y] == "P"):
-                tmp.append(-10)
-            elif(matrice[x][y] == "I"):
-                tmp.append(-50)
-            elif(matrice[x][y] == "AR"):
-                tmp.append(-130)
+            # Si le dictionnaire contient la mention alors on ajoute la valeur à la matrice des appréciations
+            if(matrice[x][y] in mention):
+                tmp.append(mention[matrice[x][y]])
             else:
                 print("error", matrice[x][y])
         res.append(tmp)
