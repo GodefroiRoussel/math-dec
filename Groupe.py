@@ -69,5 +69,5 @@ class Groupe:
                     e = self.getEleves()[2]
 
         self.note = self.note - e.getNote()
-        self.note = self.note / 2
+        self.note = self.note // 2 # division entière pour obtenir la mention correspondante
         return self.note

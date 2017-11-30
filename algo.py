@@ -14,9 +14,10 @@ from parser import *
 
 def satisfactionGenerale(groupes):
      sg=0
+     n = len(groupes)
      for groupe in groupes:
              sg=sg+groupe.getNote()
-     return sg
+     return sg//n #division entière pour obtenir la mention correspondante
 
 
 groupes = []
@@ -38,41 +39,30 @@ while(k<len(listeEleves)):
     while(l<len(listeEleves)):
         eleve.mentions.append(matriceInt[k][l])
         l+=1
-    
     eleves.append(eleve)
-
     k+=1
-
-
-
-
-
 
 
 def affecterUnEleve(eleve):
    eleveAajouter=e
-   #print(eleveAajouter.id)
    d=False
    for g in groupes:
       gProvisoire=Groupe()
       gProvisoire.eleves.append(g.eleves[0])
       gProvisoire.eleves.append(g.eleves[1])
       gProvisoire.eleves.append(e)
-      #print(gProvisoire.eleves[0].id,gProvisoire.eleves[1].id,gProvisoire.eleves[2].id,g.calculSatisfaction(),g.calculSatisfaction(),len(gProvisoire.eleves))
       if ((g.calculSatisfaction()<=gProvisoire.calculSatisfaction() or gProvisoire.calculSatisfaction()>=mention["P"])  and d==False and len(g.eleves)<3 ):
-         d=True
+         d=True #TODO: donner un vrai nom de variable 
          e.setGroupe(g)
-         #print(g.eleves[0].id)
          g.eleves.append(e)
-         #print(min(e.S(eleves[1].id)+eleves[1].S(e.id),e.S(eleves[0].id)+eleves[0].S(e.id)))
-         #print(e.id)
 
 elevesBis=eleves
 elevesChoisis=[]
 l=[]
-for e in eleves:
-        l.append(e.trierEleves(eleves))
+for eleve in eleves:
+        l.append(eleve.trierEleves(eleves))
 k=0
+#TODO: redéfinir les noms de variables 
 for liste in l:
   for e in liste:
     if(e.id==k):
@@ -90,11 +80,9 @@ elevesAffectes=[]
 elevesChoisis=[]
 m=0
 for e in eleves:
-        #print(e.id)
     if (not (e in elevesAffectes)):
         j=0
         i=0
-        
         b=False
         while(j<len(l) and b==False):
                 while((l[j][i] in elevesAffectes)==False and i<len(l[j]) and b==False):
@@ -104,21 +92,16 @@ for e in eleves:
                         g1.eleves.append(l[j][i])
                         g1.eleves.append(e)
                         satisfactionBinome=g1.calculSatisfaction()
-                        #print((l[j][i] in elevesAffectes)==False,i<len(l[j]),b==False)
                         if(satisfactionBinome<mention["AB--"] ):
                                   b=False
                         elif (m<18 and l[j][i]!=e ): #si je dépasse pas 18 groupes
                               elevesAffectes.append(e)
                               elevesAffectes.append(l[j][i])
                               groupes.append(g1)
-                              #print(e.id,l[j][i].id,satisfactionBinome)
                               m=m+1
-                              #print("ca marche")
                               elevesChoisis1=e
                               elevesChoisis2=l[j][i]
-                              
                               b=True
-
                         i=i+1
                 j=j+1
 
@@ -169,54 +152,6 @@ if(m==18):
          elevesRestantsAff.append(e)
          print("il reste ",len(elevesRestants)-len(elevesRestantsAff) ,"a affecter")
 
-
-
-
-
-"""
-
-for g in groupes:
-    if (len(g.eleves)==2):
-        print(g.eleves[0].prenom,g.eleves[1].prenom,g.calculSatisfaction())
-    if (len(g.eleves)==3):
-        print(g.eleves[0].prenom,g.eleves[1].prenom,g.eleves[2].prenom,g.calculSatisfaction())"""
-
- #TODO: Faire pour tous les binomes et trinomes possibles
-#Ici cela ne concerne que cet exemple précis
-print("Avant permutation")
-"""
-for i in range(0,5):
-        g = Groupe()
-        eleves[0].setGroupe(g)
-        eleves[1].setGroupe(g)
-        g.setEleve(eleves[0])
-        g.setEleve(eleves[1])
-        groupes.append(g)
-        del eleves[0]
-        del eleves[0]
-        g.calculSatisfaction()"""
-
-#for i in range(0,nbTrinome):
-        #g = Groupe()
-        #eleves[0].setGroupe(g)
-        #eleves[1].setGroupe(g)
-        #g.setEleve(eleves[0])
-        #g.setEleve(eleves[1])
-        #groupes.append(g)
-        #del eleves[0]
-        #del eleves[0]
-        #g.calculSatisfaction()
-#for i in range(0,nbBinome):
-        #g = Groupe()
-        #eleves[0].setGroupe(g)
-        #eleves[1].setGroupe(g)
-        #eleves[2].setGroupe(g)
-        #g.setEleve(eleves[0])
-        #g.setEleve(eleves[1])
-        #g.setEleve(eleves[2])
-        #groupes.append(g)
-        #del eleves[0]
-        #del eleves[0]
 
 # récupérer le groupe qui à la note la plus petite
 def minGroupe(groupes):
@@ -287,8 +222,7 @@ for eleve in elevesBis:
                     groupesProvisoire=permutation(eleve,e,groupesProvisoire)
                     sNouveauGroupe1=e.getGroupe().calculSatisfaction()
                     sNouveauGroupe2=eleve.getGroupe().calculSatisfaction()
-                    #print(sfg,satisfactionGenerale(groupesProvisoire))
-                    #print(eleve.id,groupe.eleves[i].id)
+                    
                     if (sfg<satisfactionGenerale(groupesProvisoire) and sAncienGroupe1<=sNouveauGroupe1 and sAncienGroupe2<=sNouveauGroupe2 ):
                         sfg=satisfactionGenerale(groupesProvisoire)
                     else:
@@ -298,20 +232,6 @@ print("nous avons teste",a,"Possibilite")
 print("apres l'algo")
 
 # intervertir l'élève dont la satisfaction est minimale avec un autre élève d'un autre groupe où la satisfaction est >=
-""""for groupe in groupes:
-        if min_groupe != groupe:
-                #dans le cas d'un groupe différent de celui avec qui on veut permuter
-                for eleve in groupe.getEleves():
-                         # on prend l'élève dont la note est supérieur ou égale à notre élève à permuter
-                        if(eleve.getNote()>= min_eleve.getNote()):
-                                #on le permute
-                                l = permutation(min_eleve,eleve)
-                                #si on obtient un meilleur résultat alors on garde la permutation
-                                if(min_groupe.getNote()<=l[0].getNote() or groupe.getNote()>=l[1].getNote()):
-                                        min_groupe = l[0]
-                                        groupe = l[1]"""
-"""print("\n")
-print("APRES")"""
 i = 0
 
 for groupe in groupesProvisoire:
